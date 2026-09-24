@@ -1,0 +1,29 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { formatDate } from '../../lib/utils';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('bench', (e) => !e.data.draft);
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { title, description, date, status } = entry.data;
+---
+
+<Base title={title} description={description} type="article" date={date}>
+  <a class="back" href="/bench/">← The Test Bench</a>
+  <article>
+    <header class="page-header">
+      <h1>{title}</h1>
+      <p class="muted">{description}</p>
+      <p class="meta" style="margin-top:0.6rem">
+        <time datetime={date.toISOString()}>{formatDate(date)}</time>
+        {status && <Fragment> · {status}</Fragment>}
+      </p>
+    </header>
+    <div class="prose"><Content /></div>
+  </article>
+</Base>

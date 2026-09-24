@@ -1,0 +1,29 @@
+---
+import '@fontsource/newsreader/400.css';
+import '@fontsource/newsreader/400-italic.css';
+import '@fontsource/newsreader/600.css';
+import '../styles/global.css';
+import SEO, { type Props as SEOProps } from '../components/SEO.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+type Props = SEOProps;
+---
+
+<!doctype html>
+<html lang="en" id="top">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark light" />
+    <SEO {...Astro.props} />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <Nav />
+    <main id="main" class="wrap">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

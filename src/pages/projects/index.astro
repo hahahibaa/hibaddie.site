@@ -1,0 +1,23 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import EntryList from '../../components/EntryList.astro';
+import { byDateDesc } from '../../lib/utils';
+
+const projects = (await getCollection('projects', (p) => !p.data.draft)).sort(byDateDesc);
+---
+
+<Base title="Projects" description="Hardware, instrumentation and robotics projects by Hiba.">
+  <header class="page-header">
+    <h1>Projects</h1>
+    <p class="muted">Instruments, robots and the occasional experiment that didn't work.</p>
+  </header>
+  <EntryList
+    items={projects.map((p) => ({
+      title: p.data.title,
+      href: `/projects/${p.id}/`,
+      description: p.data.description,
+      meta: String(p.data.date.getUTCFullYear()),
+    }))}
+  />
+</Base>

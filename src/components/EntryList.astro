@@ -1,0 +1,31 @@
+---
+export interface Item {
+  title: string;
+  href?: string;
+  description?: string;
+  meta?: string;
+}
+
+interface Props {
+  items: Item[];
+  empty?: string;
+}
+
+const { items, empty = 'Nothing here yet.' } = Astro.props;
+---
+
+{
+  items.length === 0 ? (
+    <p class="muted">{empty}</p>
+  ) : (
+    <ul class="entries">
+      {items.map((item) => (
+        <li class="entry">
+          <span class="entry-title">{item.href ? <a href={item.href}>{item.title}</a> : item.title}</span>
+          {item.meta && <span class="entry-meta">{item.meta}</span>}
+          {item.description && <span class="entry-desc">{item.description}</span>}
+        </li>
+      ))}
+    </ul>
+  )
+}

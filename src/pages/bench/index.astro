@@ -1,0 +1,25 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import EntryList from '../../components/EntryList.astro';
+import { BENCH } from '../../lib/bench';
+import { byDateDesc, formatDate } from '../../lib/utils';
+
+const entries = (await getCollection('bench', (e) => !e.data.draft)).sort(byDateDesc);
+---
+
+<Base title={BENCH.title} description={BENCH.intro.join(' ')}>
+  <header class="page-header">
+    <h1>{BENCH.title}</h1>
+    <p class="muted">{BENCH.intro.join(' ')}</p>
+  </header>
+  <EntryList
+    empty="The bench is empty right now. Experiments coming soon."
+    items={entries.map((e) => ({
+      title: e.data.title,
+      href: `/bench/${e.id}/`,
+      description: e.data.description,
+      meta: e.data.status ?? formatDate(e.data.date),
+    }))}
+  />
+</Base>

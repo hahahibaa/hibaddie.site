@@ -1,0 +1,108 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import EntryList from '../components/EntryList.astro';
+import { BENCH } from '../lib/bench';
+import { byDateDesc, formatDate } from '../lib/utils';
+
+const intro = (await getEntry('home', 'intro'))!;
+const about = (await getEntry('home', 'about'))!;
+const experience = (await getEntry('home', 'experience'))!;
+const achievements = (await getEntry('home', 'achievements'))!;
+const now = (await getEntry('home', 'now'))!;
+
+const { Content: About } = await render(about);
+const { Content: ExperienceNotes } = await render(experience);
+const { Content: Achievements } = await render(achievements);
+
+const projects = (await getCollection('projects', (p) => !p.data.draft))
+  .filter((p) => p.data.featured)
+  .sort(byDateDesc);
+
+const benchEntries = (await getCollection('bench', (e) => !e.data.draft)).sort(byDateDesc).slice(0, 3);
+
+const links = intro.data.links ?? [];
+---
+
+<Base>
+  <section class="intro-block" aria-labelledby="name">
+    <div class="intro">
+      <img src={intro.data.photo ?? '/profile.svg'} width="76" height="76" alt="Photo of Hiba" />
+      <div>
+        <h1 id="name">{intro.data.name}</h1>
+        <p class="tagline">{intro.data.tagline}</p>
+      </div>
+    </div>
+    <p class="links">
+      {
+        links.map((l, i) => (
+          <Fragment>
+            {i > 0 && <span class="sep" aria-hidden="true">·</span>}
+            <a href={l.href}>{l.label}</a>
+          </Fragment>
+        ))
+      }
+    </p>
+  </section>
+
+  <section id="about" aria-labelledby="about-label">
+    <h2 class="label" id="about-label">About</h2>
+    <div class="prose"><About /></div>
+  </section>
+
+  <section id="work" aria-labelledby="work-label">
+    <h2 class="label" id="work-label">Work &amp; experience</h2>
+    <EntryList
+      items={(experience.data.items ?? []).map((item) => ({
+        title: item.org ? `${item.title}, ${item.org}` : item.title,
+        href: item.href,
+        meta: item.period,
+        description: item.description,
+      }))}
+    />
+    <div class="prose" style="margin-top:1rem"><ExperienceNotes /></div>
+  </section>
+
+  <section id="projects" aria-labelledby="projects-label">
+    <h2 class="label" id="projects-label">Projects</h2>
+    <EntryList
+      items={projects.map((p) => ({
+        title: p.data.title,
+        href: `/projects/${p.id}/`,
+        description: p.data.description,
+        meta: String(p.data.date.getUTCFullYear()),
+      }))}
+    />
+    <p class="more"><a href="/projects/">All projects →</a></p>
+  </section>
+
+  <section id="now" aria-labelledby="now-label">
+    <h2 class="label" id="now-label">Currently building</h2>
+    <EntryList
+      items={(now.data.items ?? []).map((item) => ({
+        title: item.title,
+        href: item.href,
+        description: item.description,
+      }))}
+    />
+  </section>
+
+  <section id="achievements" aria-labelledby="achievements-label">
+    <h2 class="label" id="achievements-label">Achievements</h2>
+    <div class="prose"><Achievements /></div>
+  </section>
+
+  <section id="bench" aria-labelledby="bench-label">
+    <h2 class="label" id="bench-label">{BENCH.title}</h2>
+    <p class="muted">{BENCH.intro.join(' ')}</p>
+    <EntryList
+      empty="The bench is empty right now. Experiments coming soon."
+      items={benchEntries.map((e) => ({
+        title: e.data.title,
+        href: `/bench/${e.id}/`,
+        meta: e.data.status ?? formatDate(e.data.date),
+      }))}
+    />
+    <p class="more"><a href="/bench/">Visit the test bench →</a></p>
+  </section>
+</Base>

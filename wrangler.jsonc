@@ -1,0 +1,10 @@
+{
+  // Used only if the site is deployed through Cloudflare Workers (static assets)
+  // rather than Cloudflare Pages. Deploy command: npx wrangler deploy
+  "name": "hibaddie-site",
+  "compatibility_date": "2026-09-25",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  }
+}

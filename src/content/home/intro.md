@@ -1,6 +1,6 @@
 ---
 name: Hiba
-tagline: "Tinkineer: curious enough to ask why something ticks"
+tagline: "Robotics, automation, mechanical. Firm believer in ELYT: everything can be learned from a YouTube tutorial"
 # Your photo. Swap the file in /public to change it.
 photo: /me.jpg
 links:

@@ -1,26 +1,37 @@
 ---
-// A small chip that follows the cursor across a project row and offers
-// the matching gallery photos. Hover devices only; touch keeps the inline chip.
+// The nudge chip.
+// Hover devices: it follows the cursor across a row.
+// Touch devices: it slides up as you scroll a row into view, then leaves.
 ---
 
 <script is:inline>
   (() => {
-    if (!window.matchMedia('(hover: hover)').matches) return;
-
     const hints = document.querySelectorAll('.entry .hint');
     if (!hints.length) return;
 
+    // JS is running, so the static inline chips can step aside
+    document.documentElement.classList.add('js-hints');
+
+    const canHover = window.matchMedia('(hover: hover)').matches;
+
     const tip = document.createElement('a');
-    tip.className = 'cursor-hint';
+    tip.className = 'cursor-hint' + (canHover ? '' : ' is-toast');
     tip.setAttribute('aria-hidden', 'true');
     tip.tabIndex = -1;
     document.body.appendChild(tip);
 
     let hideTimer, settleTimer;
 
-    const place = (e) => {
-      tip.style.left = Math.min(e.clientX + 16, window.innerWidth - 250) + 'px';
-      tip.style.top = e.clientY + 18 + 'px';
+    const fill = (hint) => {
+      tip.href = hint.getAttribute('href');
+      tip.innerHTML = hint.innerHTML;
+    };
+
+    const show = () => {
+      clearTimeout(hideTimer);
+      requestAnimationFrame(() => tip.classList.add('on'));
+      // five seconds, then it gets out of the way
+      hideTimer = setTimeout(() => tip.classList.remove('on', 'settled'), 5000);
     };
 
     const hide = () => {
@@ -29,38 +40,61 @@
       tip.classList.remove('on', 'settled');
     };
 
-    hints.forEach((hint) => {
-      const entry = hint.closest('.entry');
-      const href = hint.getAttribute('href');
-      const markup = hint.innerHTML;
+    if (canHover) {
+      const place = (e) => {
+        tip.style.left = Math.min(e.clientX + 16, window.innerWidth - 250) + 'px';
+        tip.style.top = e.clientY + 18 + 'px';
+      };
 
-      entry.addEventListener('mouseenter', (e) => {
-        clearTimeout(hideTimer);
-        tip.href = href;
-        tip.innerHTML = markup;
-        place(e);
-        requestAnimationFrame(() => tip.classList.add('on'));
-        // it stays for five seconds, then gets out of the way
-        hideTimer = setTimeout(() => tip.classList.remove('on', 'settled'), 5000);
+      hints.forEach((hint) => {
+        const entry = hint.closest('.entry');
+
+        entry.addEventListener('mouseenter', (e) => {
+          fill(hint);
+          place(e);
+          show();
+        });
+
+        entry.addEventListener('mousemove', (e) => {
+          if (!tip.classList.contains('on')) return;
+          if (!tip.classList.contains('settled')) place(e);
+          clearTimeout(settleTimer);
+          tip.classList.remove('settled');
+          // once the cursor rests, stop chasing so it can be clicked
+          settleTimer = setTimeout(() => tip.classList.add('settled'), 220);
+        });
+
+        entry.addEventListener('mouseleave', (e) => {
+          if (e.relatedTarget === tip) return;
+          hide();
+        });
       });
 
-      entry.addEventListener('mousemove', (e) => {
-        if (!tip.classList.contains('on')) return;
-        if (!tip.classList.contains('settled')) place(e);
-        clearTimeout(settleTimer);
-        tip.classList.remove('settled');
-        // once the cursor rests, stop chasing so it can be clicked
-        settleTimer = setTimeout(() => tip.classList.add('settled'), 220);
-      });
+      tip.addEventListener('mouseenter', () => clearTimeout(hideTimer));
+      tip.addEventListener('mouseleave', hide);
+      tip.addEventListener('click', hide);
+      return;
+    }
 
-      entry.addEventListener('mouseleave', (e) => {
-        if (e.relatedTarget === tip) return;
-        hide();
-      });
-    });
+    // ---- touch: the chip rides along as you scroll ----
+    tip.classList.add('settled');
+    let current = null;
 
-    tip.addEventListener('mouseenter', () => clearTimeout(hideTimer));
-    tip.addEventListener('mouseleave', hide);
+    const io = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.find((e) => e.isIntersecting);
+        if (!visible) return;
+        const hint = visible.target.querySelector('.hint');
+        if (!hint || hint === current) return;
+        current = hint;
+        fill(hint);
+        show();
+      },
+      // a narrow band across the middle of the screen
+      { rootMargin: '-42% 0px -42% 0px' },
+    );
+
+    hints.forEach((hint) => io.observe(hint.closest('.entry')));
     tip.addEventListener('click', hide);
   })();
 </script>

@@ -885,16 +885,17 @@ section {
   margin-top: 3px;
 }
 
-/* on hover devices the cursor chip does the work instead */
-@media (hover: hover) {
-  .entry h3 .hint {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-  }
+/* once the script is live the floating chip does the work, on any device */
+.js-hints .entry h3 .hint {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  margin: 0;
+  padding: 0;
+  border: 0;
 }
 
 /* the chip that follows the cursor */
@@ -919,6 +920,20 @@ section {
 
 .cursor-hint.settled {
   pointer-events: auto;
+}
+
+/* touch: a chip pinned near the bottom of the screen */
+.cursor-hint.is-toast {
+  left: 50%;
+  bottom: 26px;
+  top: auto;
+  transform: translate(-50%, 10px);
+  max-width: calc(100vw - 40px);
+  text-align: center;
+}
+
+.cursor-hint.is-toast.on {
+  transform: translate(-50%, 0);
 }
 
 .cursor-hint:hover {

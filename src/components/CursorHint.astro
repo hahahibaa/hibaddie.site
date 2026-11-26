@@ -1,0 +1,66 @@
+---
+// A small chip that follows the cursor across a project row and offers
+// the matching gallery photos. Hover devices only; touch keeps the inline chip.
+---
+
+<script is:inline>
+  (() => {
+    if (!window.matchMedia('(hover: hover)').matches) return;
+
+    const hints = document.querySelectorAll('.entry .hint');
+    if (!hints.length) return;
+
+    const tip = document.createElement('a');
+    tip.className = 'cursor-hint';
+    tip.setAttribute('aria-hidden', 'true');
+    tip.tabIndex = -1;
+    document.body.appendChild(tip);
+
+    let hideTimer, settleTimer;
+
+    const place = (e) => {
+      tip.style.left = Math.min(e.clientX + 16, window.innerWidth - 190) + 'px';
+      tip.style.top = e.clientY + 18 + 'px';
+    };
+
+    const hide = () => {
+      clearTimeout(hideTimer);
+      clearTimeout(settleTimer);
+      tip.classList.remove('on', 'settled');
+    };
+
+    hints.forEach((hint) => {
+      const entry = hint.closest('.entry');
+      const href = hint.getAttribute('href');
+      const label = hint.textContent.trim();
+
+      entry.addEventListener('mouseenter', (e) => {
+        clearTimeout(hideTimer);
+        tip.href = href;
+        tip.textContent = label;
+        place(e);
+        requestAnimationFrame(() => tip.classList.add('on'));
+        // it stays for five seconds, then gets out of the way
+        hideTimer = setTimeout(() => tip.classList.remove('on', 'settled'), 5000);
+      });
+
+      entry.addEventListener('mousemove', (e) => {
+        if (!tip.classList.contains('on')) return;
+        if (!tip.classList.contains('settled')) place(e);
+        clearTimeout(settleTimer);
+        tip.classList.remove('settled');
+        // once the cursor rests, stop chasing so it can be clicked
+        settleTimer = setTimeout(() => tip.classList.add('settled'), 220);
+      });
+
+      entry.addEventListener('mouseleave', (e) => {
+        if (e.relatedTarget === tip) return;
+        hide();
+      });
+    });
+
+    tip.addEventListener('mouseenter', () => clearTimeout(hideTimer));
+    tip.addEventListener('mouseleave', hide);
+    tip.addEventListener('click', hide);
+  })();
+</script>

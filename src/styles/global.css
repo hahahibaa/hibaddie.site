@@ -848,52 +848,78 @@ section {
   }
 }
 
-/* ---------- hover nudge toward the gallery ---------- */
+/* ---------- gallery nudge ---------- */
+:root {
+  --amber: #e8c15a;
+  --amber-soft: #f3d98a;
+}
+
+/* inline chip: the touch fallback */
 .entry h3 .hint {
   font-family: var(--mono);
   font-size: 10px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--blue-lt);
-  background: rgba(77, 127, 214, 0.1);
-  border: 1px solid var(--blue-dim, #26406b);
+  color: var(--amber-soft);
+  background: rgba(77, 127, 214, 0.16);
+  border: 1px solid var(--amber);
   border-radius: 3px;
   padding: 3px 8px;
-  margin-left: 12px;
+  margin: 8px 0 0;
   white-space: nowrap;
-  display: inline-block;
-  vertical-align: 2px;
-  opacity: 0;
-  transform: translateX(-4px);
-  transition: opacity 140ms ease, transform 140ms ease, background-color 140ms ease;
+  display: block;
+  width: fit-content;
 }
 
-.entry:hover .hint,
-.entry:focus-within .hint,
-.hint:focus-visible {
+/* on hover devices the cursor chip does the work instead */
+@media (hover: hover) {
+  .entry h3 .hint {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+/* the chip that follows the cursor */
+.cursor-hint {
+  position: fixed;
+  z-index: 40;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--amber-soft);
+  background: rgba(16, 32, 60, 0.96);
+  border: 1px solid var(--amber);
+  border-radius: 3px;
+  padding: 5px 10px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 160ms ease, transform 160ms ease, background-color 140ms ease;
+}
+
+.cursor-hint.on {
   opacity: 1;
   transform: none;
 }
 
-.hint:hover {
-  background: rgba(77, 127, 214, 0.2);
-  color: var(--paper);
+.cursor-hint.settled {
+  pointer-events: auto;
 }
 
-/* no hover on touch screens: show it quietly, always */
-@media (hover: none) {
-  .entry h3 .hint {
-    opacity: 1;
-    transform: none;
-    display: block;
-    width: fit-content;
-    margin: 8px 0 0;
-  }
+.cursor-hint:hover {
+  background: rgba(232, 193, 90, 0.16);
+  color: #fff;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .entry h3 .hint {
-    transition: opacity 140ms ease;
+  .cursor-hint {
+    transition: opacity 160ms ease;
     transform: none;
   }
 }

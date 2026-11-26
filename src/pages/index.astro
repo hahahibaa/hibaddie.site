@@ -109,6 +109,7 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
         description: p.data.description,
         meta: String(p.data.date.getUTCFullYear()),
         metaSub: p.data.tools.slice(0, 3),
+        hint: p.data.gallery ? { href: `#g-${p.data.gallery}`, label: 'see the photos →' } : undefined,
       }))}
     />
 
@@ -167,7 +168,7 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
 
     {
       groups.map((group, gi) => (
-        <div class="plate-group">
+        <div class="plate-group" id={`g-${group.slug}`}>
           <h3 class="group-head">
             <span class="snum">04.{gi + 1}</span>
             {group.title}

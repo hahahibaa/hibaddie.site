@@ -17,6 +17,7 @@ const home = defineCollection({
       .array(
         z.object({
           title: z.string(),
+          slug: z.string(),
           media: z
             .array(z.object({ src: z.string(), caption: z.string().optional() }))
             .default([]),
@@ -48,6 +49,7 @@ const projects = defineCollection({
     repo: z.string().optional(),
     link: z.string().optional(),
     featured: z.boolean().default(true),
+    gallery: z.string().optional(), // slug of the matching gallery group
     draft: z.boolean().default(false),
   }),
 });

@@ -847,3 +847,53 @@ section {
     margin-top: 34px;
   }
 }
+
+/* ---------- hover nudge toward the gallery ---------- */
+.entry h3 .hint {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blue-lt);
+  background: rgba(77, 127, 214, 0.1);
+  border: 1px solid var(--blue-dim, #26406b);
+  border-radius: 3px;
+  padding: 3px 8px;
+  margin-left: 12px;
+  white-space: nowrap;
+  display: inline-block;
+  vertical-align: 2px;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 140ms ease, transform 140ms ease, background-color 140ms ease;
+}
+
+.entry:hover .hint,
+.entry:focus-within .hint,
+.hint:focus-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.hint:hover {
+  background: rgba(77, 127, 214, 0.2);
+  color: var(--paper);
+}
+
+/* no hover on touch screens: show it quietly, always */
+@media (hover: none) {
+  .entry h3 .hint {
+    opacity: 1;
+    transform: none;
+    display: block;
+    width: fit-content;
+    margin: 8px 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .entry h3 .hint {
+    transition: opacity 140ms ease;
+    transform: none;
+  }
+}

@@ -5,6 +5,7 @@ date: 2026-03-05
 tools: [ESP32, MPU6050, barometer, JLCPCB]
 repo: https://github.com/hahahibaa/esp-32-drone
 featured: false
+gallery: esp-drone
 ---
 
 A flight controller built around an ESP32, using an open-source PCB design from CircuitDigest that I had fabricated through JLCPCB.

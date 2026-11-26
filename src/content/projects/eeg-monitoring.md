@@ -5,6 +5,7 @@ date: 2026-03-12
 tools: [BioAmp EXG Pill, ESP8266, React, Vite]
 repo: https://github.com/hahahibaa/neuromentalhealth-monitor
 featured: true
+gallery: eeg-monitor
 ---
 
 A mental health monitor built on EEG readings.

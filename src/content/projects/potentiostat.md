@@ -4,6 +4,7 @@ description: A potentiostat built to replace the broken Pirani gauge on a sputte
 date: 2026-05-01
 tools: [PT100, Wheatstone bridge, Keithley ICs]
 featured: true
+gallery: potentiostat
 ---
 
 The Pirani gauge on the lab's vacuum sputter coater broke, so I built a potentiostat to take its place.

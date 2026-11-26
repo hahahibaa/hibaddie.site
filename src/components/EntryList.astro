@@ -6,6 +6,7 @@ export interface Item {
   code?: string;
   meta?: string;
   metaSub?: string[];
+  hint?: { href: string; label: string };
 }
 
 interface Props {
@@ -25,7 +26,14 @@ const { items, empty = 'Nothing here yet.' } = Astro.props;
         <article class="entry">
           <span class="code">{item.code ?? '—'}</span>
           <div>
-            <h3>{item.href ? <a href={item.href}>{item.title}</a> : item.title}</h3>
+            <h3>
+              {item.href ? <a href={item.href}>{item.title}</a> : item.title}
+              {item.hint && (
+                <a class="hint" href={item.hint.href}>
+                  {item.hint.label}
+                </a>
+              )}
+            </h3>
             {item.description && <p class="body">{item.description}</p>}
           </div>
           <div class="meta">

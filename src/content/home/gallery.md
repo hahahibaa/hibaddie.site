@@ -3,6 +3,7 @@
 # public/gallery/<folder>/ and listing them here. .jpg/.png/.webp and .mp4 all work.
 groups:
   - title: sun_bot
+    slug: sun-bot
     media:
       - src: /gallery/sun-bot/demo.gif
         caption: A full day, sped up
@@ -23,22 +24,27 @@ groups:
       - src: /gallery/sun-bot/day-plot.png
         caption: One day — states, clouds and panel current
   - title: SCARA arm
+    slug: scara-arm
     media:
       - src: /gallery/scara-arm/sim-run.mp4
         caption: Sorting policy running in simulation
   - title: SO1 arm
+    slug: so1-arm
     media:
       - src: /gallery/so1-arm/printed-parts.jpg
         caption: Printed parts, laid out before assembly
   - title: ESP drone
+    slug: esp-drone
     media:
       - src: /gallery/esp-drone/bench-test.mp4
         caption: Bench test
   - title: EEG mental health monitor
+    slug: eeg-monitor
     media:
       - src: /gallery/eeg-monitor/demo.mp4
         caption: Demo run
   - title: LCR automation
+    slug: lcr-automation
     media:
       - src: /gallery/lcr-automation/rack.jpg
         caption: Instrument rack and wiring
@@ -57,6 +63,7 @@ groups:
       - src: /gallery/lcr-automation/run.mp4
         caption: A sweep running
   - title: PID control furnace automation
+    slug: furnace
     media:
       - src: /gallery/furnace/furnace.jpg
         caption: The furnace
@@ -65,6 +72,7 @@ groups:
       - src: /gallery/furnace/run.mp4
         caption: Automated run
   - title: Potentiostat
+    slug: potentiostat
     media:
       - src: /gallery/potentiostat/bench.jpg
         caption: Bench setup
@@ -77,6 +85,7 @@ groups:
       - src: /gallery/potentiostat/run.mp4
         caption: Measurement run
   - title: PCB for light therapy
+    slug: light-therapy-pcb
     media:
       - src: /gallery/light-therapy-pcb/layout.jpg
         caption: Board layout
@@ -85,6 +94,7 @@ groups:
       - src: /gallery/light-therapy-pcb/lamp.jpg
         caption: Lamp under test
   - title: Things I did in my pastime
+    slug: pastime
     media:
       - src: /gallery/pastime/lathe.jpg
         caption: On the lathe

@@ -5,6 +5,7 @@ date: 2026-08-13
 tools: [ROS 2 Humble, PyBullet, PPO, OpenCV, Python]
 repo: https://github.com/hahahibaa/scara_ws
 featured: true
+gallery: scara-arm
 ---
 
 A 4-DOF SCARA arm (RRPR) learns, through reinforcement learning, to pick up a coloured cube and drop it in the bin that matches its colour. Training happens in PyBullet. The trained policy then runs as a ROS 2 node, driving a PyBullet-backed simulator, with an OpenCV node supplying the object detections.

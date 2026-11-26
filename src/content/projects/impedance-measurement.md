@@ -5,6 +5,7 @@ date: 2026-06-28
 tools: [Python, Arduino Uno, PT100 + MAX31865, Newtons4th PSM1735]
 repo: https://github.com/hahahibaa/LCR-Meter
 featured: true
+gallery: lcr-automation
 ---
 
 Built with Sohum Biswas at the Smart Materials Lab, IIT Indore.

@@ -5,6 +5,7 @@ date: 2026-10-23
 tools: [ROS 2 Humble, Gazebo Fortress, Nav2, slam_toolbox, Python]
 repo: https://github.com/hahahibaa/sun_bot
 featured: true
+gallery: sun-bot
 ---
 
 A small differential-drive robot carries a potted plant around a closed warehouse and keeps it in the sunlight.

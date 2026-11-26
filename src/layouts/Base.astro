@@ -1,13 +1,19 @@
 ---
 import '@fontsource/newsreader/400.css';
 import '@fontsource/newsreader/400-italic.css';
-import '@fontsource/newsreader/600.css';
+import '@fontsource/newsreader/500.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
 import '../styles/global.css';
 import SEO, { type Props as SEOProps } from '../components/SEO.astro';
-import Nav from '../components/Nav.astro';
+import IndexBar from '../components/IndexBar.astro';
 import Footer from '../components/Footer.astro';
 
-type Props = SEOProps;
+interface Props extends SEOProps {
+  home?: boolean;
+}
+
+const { home = false, ...seo } = Astro.props;
 ---
 
 <!doctype html>
@@ -15,13 +21,13 @@ type Props = SEOProps;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="dark light" />
-    <SEO {...Astro.props} />
+    <meta name="color-scheme" content="dark" />
+    <SEO {...seo} />
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
-    <Nav />
-    <main id="main" class="wrap">
+    <IndexBar home={home} />
+    <main id="main" class="sheet">
       <slot />
     </main>
     <Footer />

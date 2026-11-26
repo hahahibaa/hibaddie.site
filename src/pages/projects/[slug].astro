@@ -17,10 +17,10 @@ const { title, description, date, tools, repo, link } = project.data;
   <article>
     <header class="page-header">
       <h1>{title}</h1>
-      <p class="muted">{description}</p>
-      <p class="meta" style="margin-top:0.6rem">
+      <p class="lede muted">{description}</p>
+      <p class="meta-line">
         {date.getUTCFullYear()}
-        {tools.length > 0 && <Fragment> · {tools.join(', ')}</Fragment>}
+        {tools.length > 0 && <Fragment> · {tools.join(' · ')}</Fragment>}
         {repo && <Fragment> · <a href={repo}>code</a></Fragment>}
         {link && <Fragment> · <a href={link}>link</a></Fragment>}
       </p>

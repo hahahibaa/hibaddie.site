@@ -10,6 +10,18 @@ const home = defineCollection({
     tagline: z.string().optional(),
     photo: z.string().optional(),
     links: z.array(z.object({ label: z.string(), href: z.string() })).optional(),
+    // title-block rows on the cover
+    meta: z.array(z.object({ label: z.string(), value: z.string() })).optional(),
+    // gallery plates
+    plates: z
+      .array(
+        z.object({
+          title: z.string(),
+          caption: z.string().optional(),
+          src: z.string().optional(), // e.g. /gallery/scara.jpg or .mp4
+        }),
+      )
+      .optional(),
     items: z
       .array(
         z.object({

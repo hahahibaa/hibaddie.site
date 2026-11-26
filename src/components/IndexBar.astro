@@ -1,0 +1,59 @@
+---
+// The drawing index: numbered anchors across the top.
+// On the home page these are in-page anchors; elsewhere they point back home.
+interface Props {
+  home?: boolean;
+}
+
+const { home = false } = Astro.props;
+
+const items = [
+  { num: '00', label: 'Front', id: 'cover' },
+  { num: '01', label: 'Experience', id: 'work' },
+  { num: '02', label: 'Projects', id: 'projects' },
+  { num: '03', label: 'Reading', id: 'reading' },
+  { num: '04', label: 'Gallery', id: 'gallery' },
+];
+---
+
+<nav class="index" aria-label="Sections">
+  <div class="sheet">
+    <a class="sig" href="/">Hiba Khan <span>— hibaddie.co</span></a>
+    <ul class="idx">
+      {
+        items.map((item) => (
+          <li>
+            <a href={home ? `#${item.id}` : `/#${item.id}`} data-sec={item.id}>
+              <em>{item.num}</em>
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</nav>
+
+{
+  home && (
+    <script is:inline>
+      {(() => {
+        const tabs = [...document.querySelectorAll('.idx a')];
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                tabs.forEach((t) => t.classList.toggle('on', t.dataset.sec === e.target.id));
+              }
+            });
+          },
+          { rootMargin: '-40% 0px -55% 0px' },
+        );
+        tabs.forEach((t) => {
+          const el = document.getElementById(t.dataset.sec);
+          if (el) io.observe(el);
+        });
+      })()}
+    </script>
+  )
+}

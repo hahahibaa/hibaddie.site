@@ -14,12 +14,12 @@ const { title, description, date, status } = entry.data;
 ---
 
 <Base title={title} description={description} type="article" date={date}>
-  <a class="back" href="/bench/">← The Test Bench</a>
+  <a class="back" href="/bench/">← The test bench</a>
   <article>
     <header class="page-header">
       <h1>{title}</h1>
-      <p class="muted">{description}</p>
-      <p class="meta" style="margin-top:0.6rem">
+      <p class="lede muted">{description}</p>
+      <p class="meta-line">
         <time datetime={date.toISOString()}>{formatDate(date)}</time>
         {status && <Fragment> · {status}</Fragment>}
       </p>

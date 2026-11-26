@@ -5,19 +5,23 @@ import EntryList from '../../components/EntryList.astro';
 import { byDateDesc } from '../../lib/utils';
 
 const projects = (await getCollection('projects', (p) => !p.data.draft)).sort(byDateDesc);
+const pad = (n: number) => String(n).padStart(2, '0');
 ---
 
-<Base title="Projects" description="Hardware, instrumentation and robotics projects by Hiba.">
+<Base title="Projects" description="Instrumentation, robotics and hardware projects by Hiba Khan.">
+  <a class="back" href="/#projects">← Back to the sheet</a>
   <header class="page-header">
     <h1>Projects</h1>
-    <p class="muted">Instruments, robots and the occasional experiment that didn't work.</p>
+    <p class="lede muted">Instruments, robots, and the occasional experiment that didn't work.</p>
   </header>
   <EntryList
-    items={projects.map((p) => ({
+    items={projects.map((p, i) => ({
+      code: `P-${pad(i + 1)}`,
       title: p.data.title,
       href: `/projects/${p.id}/`,
       description: p.data.description,
       meta: String(p.data.date.getUTCFullYear()),
+      metaSub: p.data.tools.slice(0, 3),
     }))}
   />
 </Base>

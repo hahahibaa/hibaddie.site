@@ -9,13 +9,15 @@ const entries = (await getCollection('bench', (e) => !e.data.draft)).sort(byDate
 ---
 
 <Base title={BENCH.title} description={BENCH.intro.join(' ')}>
+  <a class="back" href="/#projects">← Back to the sheet</a>
   <header class="page-header">
     <h1>{BENCH.title}</h1>
-    <p class="muted">{BENCH.intro.join(' ')}</p>
+    <p class="lede muted">{BENCH.intro.join(' ')}</p>
   </header>
   <EntryList
-    empty="The bench is empty right now. Experiments coming soon."
+    empty="The bench is empty right now."
     items={entries.map((e) => ({
+      code: '··',
       title: e.data.title,
       href: `/bench/${e.id}/`,
       description: e.data.description,

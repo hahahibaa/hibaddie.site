@@ -206,6 +206,15 @@ a:hover {
   color: #6f7a8c;
 }
 
+.cover-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin: 44px 0 -26px;
+}
+
 /* small screens: the rail stacks above the page */
 @media (max-width: 900px) {
   .layout {
@@ -233,6 +242,7 @@ a:hover {
   .idx .sub a {
     padding: 5px 0 5px 13px;
   }
+
 }
 
 /* ---------- sections ---------- */
@@ -792,4 +802,48 @@ section {
 /* a group with a single plate shouldn't leave two empty columns */
 .plates:has(> .plate:only-child) {
   grid-template-columns: repeat(2, 1fr);
+}
+
+/* phone cover: photo beside the name (overrides the 720px rules above) */
+@media (max-width: 900px) {
+  .cover {
+    padding-top: 30px;
+  }
+  .covergrid {
+    display: grid;
+    grid-template-columns: 92px minmax(0, 1fr);
+    gap: 16px;
+    align-items: start;
+  }
+  .covergrid > div {
+    order: 2;
+  }
+  .portrait {
+    order: 1;
+    max-width: none;
+    padding: 4px;
+    margin-top: 4px;
+  }
+  .cover h1 {
+    font-size: 27px;
+    margin-bottom: 8px;
+  }
+  .lede {
+    font-size: 15.5px;
+    line-height: 1.5;
+    color: var(--soft);
+    max-width: none;
+  }
+  .ways {
+    margin-top: 14px;
+  }
+  .tblock {
+    margin-top: 26px;
+  }
+  .cover-label {
+    margin: 30px 0 -22px;
+  }
+  .cover-body {
+    margin-top: 34px;
+  }
 }

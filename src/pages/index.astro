@@ -23,7 +23,7 @@ const bench = (await getCollection('bench', (e) => !e.data.draft)).sort(byDateDe
 const links = intro.data.links ?? [];
 const meta = intro.data.meta ?? [];
 const groups = (gallery.data.groups ?? []).filter((g) => g.media.length > 0);
-const readingItems = reading.data.items ?? [];
+const readingLists = (reading.data.lists ?? []).filter((l) => l.items.length > 0);
 
 const pad = (n: number) => String(n).padStart(2, '0');
 const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
@@ -148,16 +148,26 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
       <p class="blurb">What I'm working through, and what I keep going back to.</p>
     </div>
 
-    <EntryList
-      empty="List in progress."
-      items={readingItems.map((item) => ({
-        code: '—',
-        title: item.org ? `${item.title} — ${item.org}` : item.title,
-        href: item.href,
-        description: item.description,
-        meta: item.period,
-      }))}
-    />
+    {
+      readingLists.map((list, li) => (
+        <div class="plate-group">
+          <h3 class="group-head">
+            <span class="snum">03.{li + 1}</span>
+            {list.title}
+          </h3>
+          <EntryList
+            items={list.items.map((item, ii) => ({
+              code: `${li + 1}.${ii + 1}`,
+              title: item.title,
+              href: item.href,
+              description: item.by,
+              meta: item.where,
+            }))}
+          />
+        </div>
+      ))
+    }
+
     <div class="rule"></div>
   </section>
 

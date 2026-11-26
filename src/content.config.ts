@@ -24,6 +24,24 @@ const home = defineCollection({
         }),
       )
       .optional(),
+    // reading, grouped into lists
+    lists: z
+      .array(
+        z.object({
+          title: z.string(),
+          items: z
+            .array(
+              z.object({
+                title: z.string(),
+                by: z.string().optional(),
+                href: z.string().optional(),
+                where: z.string().optional(),
+              }),
+            )
+            .default([]),
+        }),
+      )
+      .optional(),
     items: z
       .array(
         z.object({

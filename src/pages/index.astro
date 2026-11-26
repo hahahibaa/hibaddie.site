@@ -21,7 +21,7 @@ const bench = (await getCollection('bench', (e) => !e.data.draft)).sort(byDateDe
 
 const links = intro.data.links ?? [];
 const meta = intro.data.meta ?? [];
-const plates = gallery.data.plates ?? [];
+const groups = (gallery.data.groups ?? []).filter((g) => g.media.length > 0);
 const readingItems = reading.data.items ?? [];
 
 const pad = (n: number) => String(n).padStart(2, '0');
@@ -164,28 +164,36 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
       <p class="blurb">Build photos, half-finished things, and work still on the bench.</p>
     </div>
 
-    <div class="plates">
-      {
-        plates.map((plate, i) => (
-          <figure class="plate">
-            <div class="frame">
-              {plate.src ? (
-                isVideo(plate.src) ? (
-                  <video src={plate.src} muted loop playsinline autoplay preload="metadata" />
-                ) : (
-                  <img src={plate.src} alt={plate.caption ?? plate.title} loading="lazy" />
-                )
-              ) : (
-                <span>IMG — {plate.title.toLowerCase()}</span>
-              )}
-            </div>
-            <figcaption>
-              <span>{plate.caption ?? plate.title}</span>
-              <em>PL {pad(i + 1)}</em>
-            </figcaption>
-          </figure>
-        ))
-      }
-    </div>
+    {
+      groups.map((group, gi) => (
+        <div class="plate-group">
+          <h3 class="group-head">
+            <span class="snum">04.{pad(gi + 1)}</span>
+            {group.title}
+          </h3>
+          <div class="plates">
+            {group.media.map((m, mi) => (
+              <figure class="plate">
+                <div class="frame">
+                  {isVideo(m.src) ? (
+                    <video src={m.src} muted loop playsinline autoplay preload="metadata" />
+                  ) : (
+                    <a href={m.src} target="_blank" rel="noopener">
+                      <img src={m.src} alt={m.caption ?? group.title} loading="lazy" />
+                    </a>
+                  )}
+                </div>
+                <figcaption>
+                  <span>{m.caption}</span>
+                  <em>
+                    PL {pad(gi + 1)}.{mi + 1}
+                  </em>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      ))
+    }
   </section>
 </Base>

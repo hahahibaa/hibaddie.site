@@ -12,13 +12,14 @@ const home = defineCollection({
     links: z.array(z.object({ label: z.string(), href: z.string() })).optional(),
     // title-block rows on the cover
     meta: z.array(z.object({ label: z.string(), value: z.string() })).optional(),
-    // gallery plates
-    plates: z
+    // gallery: one group per project, each with its own media
+    groups: z
       .array(
         z.object({
           title: z.string(),
-          caption: z.string().optional(),
-          src: z.string().optional(), // e.g. /gallery/scara.jpg or .mp4
+          media: z
+            .array(z.object({ src: z.string(), caption: z.string().optional() }))
+            .default([]),
         }),
       )
       .optional(),

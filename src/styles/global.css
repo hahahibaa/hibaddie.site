@@ -206,7 +206,7 @@ a:hover {
   color: #6f7a8c;
 }
 
-/* small screens: the rail lies down across the top */
+/* small screens: the rail stacks above the page */
 @media (max-width: 900px) {
   .layout {
     display: block;
@@ -216,52 +216,22 @@ a:hover {
     max-width: none;
   }
   .rail {
-    position: sticky;
-    top: 0;
+    position: static;
     height: auto;
-    flex-direction: row;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 18px;
-    padding: 0;
-    background: var(--ink);
+    padding: 26px 0 22px;
+    gap: 20px;
     border-bottom: 1px solid var(--rule);
-    z-index: 10;
-  }
-  .sig {
-    white-space: nowrap;
-    flex: 0 0 auto;
+    margin-bottom: 8px;
   }
   .sig span {
-    display: none;
-  }
-  .idx {
-    display: flex;
-    gap: 20px;
-    border-left: 0;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-  .idx::-webkit-scrollbar {
-    display: none;
+    display: inline;
+    color: var(--rule);
   }
   .idx a {
-    padding: 18px 0;
-    border-left: 0;
-    border-bottom: 2px solid transparent;
-    margin: 0;
-    white-space: nowrap;
-    font-size: 10.5px;
+    padding: 7px 0 7px 16px;
   }
-  .idx a em {
-    margin-right: 6px;
-  }
-  .idx a.on {
-    border-left-color: transparent;
-    border-bottom-color: var(--blue);
-  }
-  .idx .sub {
-    display: none;
+  .idx .sub a {
+    padding: 5px 0 5px 13px;
   }
 }
 

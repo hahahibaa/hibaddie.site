@@ -85,7 +85,7 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
         href: item.href,
         description: item.description,
         meta: item.period,
-        hint: { href: '#projects', label: 'see what I built :)' },
+        hint: { href: '#projects', q: 'Wanna see my projects?', go: 'go to projects →' },
       }))}
     />
 
@@ -110,7 +110,9 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
         description: p.data.description,
         meta: String(p.data.date.getUTCFullYear()),
         metaSub: p.data.tools.slice(0, 3),
-        hint: p.data.gallery ? { href: `#g-${p.data.gallery}`, label: 'see the photos :)' } : undefined,
+        hint: p.data.gallery
+          ? { href: `#g-${p.data.gallery}`, q: 'Wanna see the pictures?', go: 'go to the gallery →' }
+          : { href: '#work', q: 'Wanna see my experience?', go: 'go to experience →' },
       }))}
     />
 
@@ -214,7 +216,7 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
         title: item.title,
         description: item.description,
         meta: item.period ?? 'planned',
-        hint: { href: '#gallery', label: 'see the gallery :)' },
+        hint: { href: '#gallery', q: 'Wanna see the pictures?', go: 'go to the gallery →' },
       }))}
     />
   </section>

@@ -19,7 +19,7 @@
     let hideTimer, settleTimer;
 
     const place = (e) => {
-      tip.style.left = Math.min(e.clientX + 16, window.innerWidth - 190) + 'px';
+      tip.style.left = Math.min(e.clientX + 16, window.innerWidth - 250) + 'px';
       tip.style.top = e.clientY + 18 + 'px';
     };
 
@@ -32,12 +32,12 @@
     hints.forEach((hint) => {
       const entry = hint.closest('.entry');
       const href = hint.getAttribute('href');
-      const label = hint.textContent.trim();
+      const markup = hint.innerHTML;
 
       entry.addEventListener('mouseenter', (e) => {
         clearTimeout(hideTimer);
         tip.href = href;
-        tip.textContent = label;
+        tip.innerHTML = markup;
         place(e);
         requestAnimationFrame(() => tip.classList.add('on'));
         // it stays for five seconds, then gets out of the way

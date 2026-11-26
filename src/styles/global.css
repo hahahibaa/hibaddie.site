@@ -736,3 +736,8 @@ section {
   display: block;
   height: 100%;
 }
+
+/* a group with a single plate shouldn't leave two empty columns */
+.plates:has(> .plate:only-child) {
+  grid-template-columns: repeat(2, 1fr);
+}

@@ -2,6 +2,26 @@
 # Gallery. One group per project; add media by dropping files in
 # public/gallery/<folder>/ and listing them here. .jpg/.png/.webp and .mp4 all work.
 groups:
+  - title: sun_bot
+    media:
+      - src: /gallery/sun-bot/demo.gif
+        caption: A full day, sped up
+      - src: /gallery/sun-bot/robot-plant.png
+        caption: The robot and its plant, in Gazebo
+      - src: /gallery/sun-bot/inside.png
+        caption: Inside the warehouse — one of three windows
+      - src: /gallery/sun-bot/warehouse.png
+        caption: The warehouse from outside
+      - src: /gallery/sun-bot/map.png
+        caption: SLAM map, with the three windows marked
+      - src: /gallery/sun-bot/sun-patches.png
+        caption: Where the sun lands each hour, Jabalpur
+      - src: /gallery/sun-bot/follow-east.png
+        caption: Following the sun at the east window
+      - src: /gallery/sun-bot/strategies.png
+        caption: "Parked vs greedy vs learned: 50% of daylight in sun"
+      - src: /gallery/sun-bot/day-plot.png
+        caption: One day — states, clouds and panel current
   - title: SCARA arm
     media:
       - src: /gallery/scara-arm/sim-run.mp4

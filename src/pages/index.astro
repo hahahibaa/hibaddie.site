@@ -168,7 +168,7 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
       groups.map((group, gi) => (
         <div class="plate-group">
           <h3 class="group-head">
-            <span class="snum">04.{pad(gi + 1)}</span>
+            <span class="snum">04.{gi + 1}</span>
             {group.title}
           </h3>
           <div class="plates">

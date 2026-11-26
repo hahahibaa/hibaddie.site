@@ -26,10 +26,12 @@ const { home = false, ...seo } = Astro.props;
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
-    <IndexBar home={home} />
-    <main id="main" class="sheet">
-      <slot />
-    </main>
+    <div class="layout">
+      <IndexBar home={home} />
+      <main id="main">
+        <slot />
+      </main>
+    </div>
     <Footer />
   </body>
 </html>

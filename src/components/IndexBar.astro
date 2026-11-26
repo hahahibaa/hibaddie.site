@@ -1,6 +1,5 @@
 ---
-// The drawing index: numbered anchors across the top.
-// On the home page these are in-page anchors; elsewhere they point back home.
+// The sheet index: a vertical rail on desktop, a scrolling strip on small screens.
 interface Props {
   home?: boolean;
 }
@@ -8,50 +7,61 @@ interface Props {
 const { home = false } = Astro.props;
 
 const items = [
-  { num: '00', label: 'Front', id: 'cover' },
-  { num: '01', label: 'Experience', id: 'work' },
-  { num: '02', label: 'Projects', id: 'projects' },
+  { num: '00', label: 'About me', id: 'cover' },
+  { num: '01', label: 'Experience', id: 'work', children: [{ label: 'Achievements', id: 'achievements' }] },
+  { num: '02', label: 'Projects', id: 'projects', children: [{ label: 'On the bench', id: 'on-the-bench' }] },
   { num: '03', label: 'Reading', id: 'reading' },
   { num: '04', label: 'Gallery', id: 'gallery' },
   { num: '05', label: 'Upcoming', id: 'upcoming' },
 ];
+
+const href = (id: string) => (home ? `#${id}` : `/#${id}`);
 ---
 
-<nav class="index" aria-label="Sections">
-  <div class="sheet">
-    <a class="sig" href="/">Hiba Khan <span>— hibaddie.co</span></a>
-    <ul class="idx">
-      {
-        items.map((item) => (
-          <li>
-            <a href={home ? `#${item.id}` : `/#${item.id}`} data-sec={item.id}>
-              <em>{item.num}</em>
-              {item.label}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </div>
+<nav class="rail" aria-label="Sections">
+  <a class="sig" href="/">Hiba Khan <span>— hibaddie.co</span></a>
+  <ul class="idx">
+    {
+      items.map((item) => (
+        <li>
+          <a href={href(item.id)} data-sec={item.id}>
+            <em>{item.num}</em>
+            {item.label}
+          </a>
+          {item.children && (
+            <ul class="sub">
+              {item.children.map((child) => (
+                <li>
+                  <a href={href(child.id)} data-sec={child.id}>
+                    {child.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </li>
+      ))
+    }
+  </ul>
 </nav>
 
 {
   home && (
     <script is:inline>
       {(() => {
-        const tabs = [...document.querySelectorAll('.idx a')];
+        const links = [...document.querySelectorAll('.idx a[data-sec]')];
         const io = new IntersectionObserver(
           (entries) => {
             entries.forEach((e) => {
               if (e.isIntersecting) {
-                tabs.forEach((t) => t.classList.toggle('on', t.dataset.sec === e.target.id));
+                links.forEach((l) => l.classList.toggle('on', l.dataset.sec === e.target.id));
               }
             });
           },
-          { rootMargin: '-40% 0px -55% 0px' },
+          { rootMargin: '-35% 0px -60% 0px' },
         );
-        tabs.forEach((t) => {
-          const el = document.getElementById(t.dataset.sec);
+        links.forEach((l) => {
+          const el = document.getElementById(l.dataset.sec);
           if (el) io.observe(el);
         });
       })()}

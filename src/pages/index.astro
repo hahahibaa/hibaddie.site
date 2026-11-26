@@ -87,7 +87,7 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
       }))}
     />
 
-    <h3 class="snum" style="margin:38px 0 10px">Selected achievements</h3>
+    <h3 id="achievements" class="snum" style="margin:38px 0 10px">Selected achievements</h3>
     <div class="prose muted"><Achievements /></div>
     <div class="rule"></div>
   </section>
@@ -113,7 +113,7 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
 
     <p class="more"><a href="/projects/">All {allProjects.length} projects →</a></p>
 
-    <h3 class="snum" style="margin:46px 0 10px">On the bench</h3>
+    <h3 id="on-the-bench" class="snum" style="margin:46px 0 10px">On the bench</h3>
     <EntryList
       items={[
         ...(now.data.items ?? []).map((item) => ({

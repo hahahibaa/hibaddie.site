@@ -118,24 +118,26 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
 
     <p class="more"><a href="/projects/">All {allProjects.length} projects →</a></p>
 
+    <h3 class="snum" style="margin:46px 0 10px">Currently building</h3>
+    <EntryList
+      items={(now.data.items ?? []).map((item) => ({
+        code: '··',
+        title: item.title,
+        href: item.href,
+        description: item.description,
+        meta: 'in progress',
+      }))}
+    />
+
     <h3 id="on-the-bench" class="snum" style="margin:46px 0 10px">On the bench</h3>
     <EntryList
-      items={[
-        ...(now.data.items ?? []).map((item) => ({
-          code: '··',
-          title: item.title,
-          href: item.href,
-          description: item.description,
-          meta: 'in progress',
-        })),
-        ...bench.map((b) => ({
-          code: '··',
-          title: b.data.title,
-          href: `/bench/${b.id}/`,
-          description: b.data.description,
-          meta: b.data.status ?? String(b.data.date.getUTCFullYear()),
-        })),
-      ]}
+      items={bench.map((b) => ({
+        code: '··',
+        title: b.data.title,
+        href: `/bench/${b.id}/`,
+        description: b.data.description,
+        meta: b.data.status ?? String(b.data.date.getUTCFullYear()),
+      }))}
     />
     <div class="rule"></div>
   </section>

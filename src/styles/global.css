@@ -754,6 +754,10 @@ section {
   color: var(--soft);
 }
 
+.gold {
+  color: var(--gold-soft);
+}
+
 /* ---------- prose ---------- */
 .prose {
   max-width: 66ch;

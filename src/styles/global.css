@@ -1127,13 +1127,29 @@ section {
   transition: transform 160ms ease, background-color 160ms ease;
 }
 
-.launcher img,
-.launcher video {
+.launcher-media {
+  position: relative;
   width: 68px;
   height: 68px;
-  object-fit: cover;
   border-radius: 15px;
+  overflow: hidden;
   display: block;
+  flex: 0 0 auto;
+  background: #000;
+}
+
+.launcher-media .pv {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 420ms ease;
+}
+
+.launcher-media .pv.on {
+  opacity: 1;
 }
 
 .launcher-label {
@@ -1297,8 +1313,7 @@ section {
     right: max(16px, env(safe-area-inset-right));
     bottom: calc(16px + env(safe-area-inset-bottom));
   }
-  .launcher img,
-  .launcher video {
+  .launcher-media {
     width: 50px;
     height: 50px;
     border-radius: 13px;

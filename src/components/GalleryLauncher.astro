@@ -17,6 +17,12 @@ const media = groups.flatMap((group, gi) =>
 // the launcher previews a clip — a still graph is a dull invitation
 const cover = media.find((m) => m.cover) ?? media.find((m) => /\.(mp4|webm|mov)$/i.test(m.src)) ?? media[0];
 const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
+
+// the launcher cycles every clip first, then the stills, then loops
+const clips = media.filter((m) => isVideo(m.src)).map((m) => m.src);
+const stills = media.filter((m) => !isVideo(m.src)).map((m) => m.src);
+const ordered = cover ? [cover.src, ...clips.filter((s) => s !== cover.src)] : clips;
+const playlist = [...ordered, ...stills];
 ---
 
 {
@@ -29,12 +35,14 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
       </div>
 
       <button class="launcher" id="gal-launcher" type="button" aria-expanded="false" aria-controls="gal-panel">
-        {cover &&
-          (/\.(mp4|webm|mov)$/i.test(cover.src) ? (
-            <video src={cover.src} muted loop autoplay playsinline preload="metadata" />
-          ) : (
-            <img src={cover.src} alt="" loading="lazy" />
-          ))}
+        <span class="launcher-media" id="gal-preview" data-playlist={JSON.stringify(playlist)}>
+          {cover &&
+            (isVideo(cover.src) ? (
+              <video class="pv on" src={cover.src} muted autoplay playsinline preload="auto" />
+            ) : (
+              <img class="pv on" src={cover.src} alt="" />
+            ))}
+        </span>
         <span class="launcher-label">Gallery</span>
         <span class="launcher-badge">{media.length}</span>
         <span class="sr">Open the picture drawer</span>
@@ -81,6 +89,58 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
 }
 
 <script is:inline>
+  // the preview runs as a slideshow: each clip plays out, each still holds briefly
+  (() => {
+    const stage = document.getElementById('gal-preview');
+    if (!stage) return;
+    const list = JSON.parse(stage.dataset.playlist || '[]');
+    if (list.length < 2) return;
+
+    const isVid = (s) => /\.(mp4|webm|mov)$/i.test(s);
+    let i = 0;
+    let timer;
+
+    const next = () => {
+      i = (i + 1) % list.length;
+      show(list[i]);
+    };
+
+    function show(src) {
+      clearTimeout(timer);
+      const node = document.createElement(isVid(src) ? 'video' : 'img');
+      node.className = 'pv';
+      if (isVid(src)) {
+        node.muted = true;
+        node.autoplay = true;
+        node.playsInline = true;
+        node.preload = 'auto';
+        node.addEventListener('ended', next, { once: true });
+        timer = setTimeout(next, 9000); // in case it never fires
+      } else {
+        node.alt = '';
+        timer = setTimeout(next, 3200);
+      }
+      node.src = src;
+      stage.appendChild(node);
+      requestAnimationFrame(() => {
+        node.classList.add('on');
+        const old = [...stage.querySelectorAll('.pv')].slice(0, -1);
+        old.forEach((o) => {
+          o.classList.remove('on');
+          setTimeout(() => o.remove(), 450);
+        });
+      });
+    }
+
+    const first = stage.querySelector('.pv');
+    if (first && first.tagName === 'VIDEO') {
+      first.addEventListener('ended', next, { once: true });
+      timer = setTimeout(next, 9000);
+    } else {
+      timer = setTimeout(next, 3200);
+    }
+  })();
+
   (() => {
     const btn = document.getElementById('gal-launcher');
     const panel = document.getElementById('gal-panel');

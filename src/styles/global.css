@@ -25,6 +25,11 @@
   box-sizing: border-box;
 }
 
+/* display:grid/flex below would otherwise beat the hidden attribute */
+[hidden] {
+  display: none !important;
+}
+
 html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
@@ -631,8 +636,13 @@ section {
   transition: opacity 160ms ease;
 }
 
+.lb {
+  pointer-events: none;
+}
+
 .lb.on {
   opacity: 1;
+  pointer-events: auto;
 }
 
 .lb-stage {

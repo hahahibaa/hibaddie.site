@@ -6,7 +6,7 @@
 
 <script is:inline>
   (() => {
-    const hints = document.querySelectorAll('.entry .hint');
+    const hints = document.querySelectorAll('.hint');
     if (!hints.length) return;
 
     // JS is running, so the static inline chips can step aside
@@ -51,7 +51,7 @@
       };
 
       hints.forEach((hint) => {
-        const entry = hint.closest('.entry');
+        const entry = hint.closest('.entry, .card, .nudge-only');
 
         entry.addEventListener('mouseenter', (e) => {
           fill(hint);
@@ -88,7 +88,7 @@
     };
 
     hints.forEach((hint) => {
-      const entry = hint.closest('.entry');
+      const entry = hint.closest('.entry, .card, .nudge-only') || hint.parentElement;
       entry.addEventListener(
         'touchstart',
         (e) => {

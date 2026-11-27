@@ -27,6 +27,7 @@ groups:
     slug: scara-arm
     media:
       - src: /gallery/scara-arm/sim-run.mp4
+        poster: /gallery/scara-arm/sim-run-poster.jpg
         caption: Sorting policy running in simulation
   - title: SO1 arm
     slug: so1-arm
@@ -37,11 +38,13 @@ groups:
     slug: esp-drone
     media:
       - src: /gallery/esp-drone/bench-test.mp4
+        poster: /gallery/esp-drone/bench-test-poster.jpg
         caption: Bench test
   - title: EEG mental health monitor
     slug: eeg-monitor
     media:
       - src: /gallery/eeg-monitor/demo.mp4
+        poster: /gallery/eeg-monitor/demo-poster.jpg
         caption: Demo run
   - title: LCR automation
     slug: lcr-automation
@@ -61,6 +64,7 @@ groups:
       - src: /gallery/lcr-automation/data.jpg
         caption: Logged impedance data
       - src: /gallery/lcr-automation/run.mp4
+        poster: /gallery/lcr-automation/run-poster.jpg
         caption: A sweep running
   - title: PID control furnace automation
     slug: furnace
@@ -70,6 +74,7 @@ groups:
       - src: /gallery/furnace/switch.jpg
         caption: Tapping into the heater switch
       - src: /gallery/furnace/run.mp4
+        poster: /gallery/furnace/run-poster.jpg
         caption: Automated run
   - title: Potentiostat
     slug: potentiostat
@@ -83,6 +88,7 @@ groups:
       - src: /gallery/potentiostat/coater.jpg
         caption: Sputter coater internals
       - src: /gallery/potentiostat/run.mp4
+        poster: /gallery/potentiostat/run-poster.jpg
         caption: Measurement run
   - title: PCB for light therapy
     slug: light-therapy-pcb
@@ -99,8 +105,10 @@ groups:
       - src: /gallery/pastime/lathe.jpg
         caption: On the lathe
       - src: /gallery/pastime/clip-1.mp4
+        poster: /gallery/pastime/clip-1-poster.jpg
         caption: A counter circuit, simulated
       - src: /gallery/pastime/clip-2.mp4
+        poster: /gallery/pastime/clip-2-poster.jpg
         caption: Turned on the lathe
         cover: true # this one plays inside the gallery launcher
 ---

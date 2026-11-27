@@ -7,6 +7,7 @@ const groups = (gallery.data.groups ?? []).filter((g) => g.media.length > 0);
 const media = groups.flatMap((group, gi) =>
   group.media.map((m, mi) => ({
     src: m.src,
+    poster: m.poster,
     cover: m.cover ?? false,
     caption: m.caption ?? group.title,
     group: group.title,
@@ -71,7 +72,7 @@ const playlist = [...ordered, ...stills];
             >
               {isVideo(m.src) ? (
                 <Fragment>
-                  <video src={`${m.src}#t=0.1`} muted playsinline preload="metadata" />
+                  <img src={m.poster ?? '/profile.svg'} alt={`${m.caption} — video`} loading="lazy" />
                   <span class="play" aria-hidden="true">
                     ▶
                   </span>

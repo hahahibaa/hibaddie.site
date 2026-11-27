@@ -6,6 +6,26 @@ tools: [Python, Arduino Uno, PT100 + MAX31865, Newtons4th PSM1735]
 repo: https://github.com/hahahibaa/LCR-Meter
 featured: true
 gallery: lcr-automation
+brief:
+  problem: >-
+    The Smart Materials Lab had a capable LCR meter (Newtons4th PSM1735) sitting unused.
+    Temperature-dependent impedance runs needed frequency sweeps, logged sample
+    temperature and clean data capture, down towards −200 °C.
+  built: >-
+    A Python application that drives the PSM1735 over USB with its ASCII command set,
+    runs frequency sweeps, logs temperature against every measurement, plots live and
+    exports to Excel. Temperature control is a PT100 and MAX31865 read by an Arduino Uno
+    running PID and switching heating through a relay. Built with Sohum Biswas.
+  results: >-
+    Stable, repeatable temperature control and automated capture replacing a manual
+    instrument. Patent pending. TODO: add the measured temperature range and one
+    sample sweep (Bode or Nyquist) once you can share it.
+  failed: >-
+    Two dead ends first. The lab's iTherm ULT-99 controller cost days of Modbus decoding
+    and then turned out to bottom out at −99 °C. A thermocouple and MAX31856 on an ESP32
+    worked until the junction was accidentally cut, and the repair was not good enough —
+    two days lost. The third attempt, PT100 and MAX31865, is the one that held.
+  next: "TODO: next steps for the rig — wider temperature range, more sample types, publication?"
 ---
 
 Built with Sohum Biswas at the Smart Materials Lab, IIT Indore.

@@ -325,6 +325,15 @@ section {
   margin: 0;
 }
 
+/* the line under the name: quiet, almost a footnote */
+.cover .lede {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: #5e5e5e;
+  margin-top: 2px;
+}
+
 .portrait {
   border: 1px solid var(--rule);
   border-radius: 14px;
@@ -348,6 +357,10 @@ section {
 }
 
 .ways {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 0;
   font-family: var(--mono);
   font-size: 12px;
   letter-spacing: 0.06em;
@@ -984,10 +997,9 @@ section {
     font-size: 27px;
     margin-bottom: 8px;
   }
-  .lede {
-    font-size: 15.5px;
-    line-height: 1.5;
-    color: var(--soft);
+  .cover .lede {
+    font-size: 10.5px;
+    line-height: 1.45;
     max-width: none;
   }
   .ways {
@@ -1011,7 +1023,7 @@ section {
 }
 
 /* inline chip: the touch fallback */
-.entry h3 .hint {
+.hint {
   background: #0a0a0a;
   border: 1.5px solid var(--gold);
   border-radius: 10px;
@@ -1042,7 +1054,7 @@ section {
 }
 
 /* once the script is live the floating chip does the work, on any device */
-.js-hints .entry h3 .hint {
+.js-hints .hint {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -1400,7 +1412,7 @@ section {
   margin-bottom: -2px;
 }
 
-.entry h3 .hint,
+.hint,
 .cursor-hint {
   display: flex;
   align-items: center;
@@ -1482,4 +1494,322 @@ section {
   .click-me .arrow {
     animation: none;
   }
+}
+
+/* ============================================================
+   compact layout: cards, chips, mini grids  (mobile first)
+   ============================================================ */
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card {
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  background: #0d0d0d;
+  padding: 0;
+  overflow: hidden;
+}
+
+.card[open] {
+  border-color: #3a3a3a;
+}
+
+.card > summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 11px 36px 11px 14px;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2px 12px;
+  align-items: baseline;
+}
+
+.card > summary::-webkit-details-marker {
+  display: none;
+}
+
+.card > summary::after {
+  content: '+';
+  position: absolute;
+  right: 13px;
+  top: 10px;
+  font-family: var(--mono);
+  font-size: 15px;
+  color: var(--soft);
+}
+
+.card[open] > summary::after {
+  content: '–';
+}
+
+.card-role {
+  font-family: var(--serif);
+  font-size: 16.5px;
+  line-height: 1.3;
+  color: var(--paper);
+}
+
+.card > summary .org {
+  grid-column: 1;
+  font-size: 14px;
+}
+
+.card-when {
+  grid-row: 1;
+  grid-column: 2;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--soft);
+  white-space: nowrap;
+}
+
+.card-sub {
+  grid-column: 1 / -1;
+  color: var(--soft);
+  font-size: 14px;
+  line-height: 1.45;
+  margin-top: 3px;
+}
+
+.card-body {
+  margin: 0;
+  padding: 0 14px 12px;
+  color: var(--soft);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.card-link {
+  margin: 0;
+  padding: 0 14px 13px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-family: var(--pixel);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.card-link a {
+  border: 0;
+  color: var(--gold-hi);
+}
+
+/* featured project brief */
+.brief {
+  margin: 0;
+  padding: 2px 14px 10px;
+  display: grid;
+  gap: 2px 14px;
+}
+
+.brief dt {
+  font-family: var(--pixel);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+  margin-top: 10px;
+}
+
+.brief dd {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: #cfcfcf;
+}
+
+@media (min-width: 620px) {
+  .brief {
+    grid-template-columns: 96px minmax(0, 1fr);
+  }
+  .brief dt {
+    margin-top: 6px;
+  }
+  .brief dd {
+    margin-top: 6px;
+  }
+}
+
+/* achievements as chips */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.chip {
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 6px 12px;
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  background: #101010;
+}
+
+.chip b {
+  font-weight: 500;
+  font-size: 13.5px;
+  color: var(--gold-hi);
+}
+
+.chip span {
+  font-size: 13px;
+  color: var(--soft);
+}
+
+.chip em {
+  font-style: normal;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: #6f7a8c;
+}
+
+.snum.sub {
+  display: block;
+  margin: 26px 0 10px;
+}
+
+/* compact grids for everything else */
+.showall {
+  margin-top: 16px;
+  border-top: 1px solid var(--rule);
+}
+
+.showall > summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 12px 2px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--pixel);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+}
+
+.showall > summary::-webkit-details-marker {
+  display: none;
+}
+
+.showall > summary em {
+  font-style: normal;
+  font-family: var(--mono);
+  color: var(--soft);
+  font-size: 10px;
+}
+
+.showall[open] > summary {
+  border-bottom: 1px solid var(--rule);
+}
+
+.minigrid {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.minigrid a,
+.minigrid div {
+  display: block;
+  height: 100%;
+  border: 1px solid var(--rule);
+  border-radius: 9px;
+  padding: 10px 11px;
+  background: #0d0d0d;
+}
+
+.minigrid a {
+  color: inherit;
+}
+
+.minigrid strong {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 14.5px;
+  line-height: 1.3;
+  color: var(--paper);
+}
+
+.minigrid span {
+  display: block;
+  margin-top: 4px;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--soft);
+}
+
+.minigrid em {
+  display: block;
+  margin-top: 7px;
+  font-style: normal;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.06em;
+  color: #6f7a8c;
+}
+
+@media (hover: hover) {
+  .card > summary:hover .card-role,
+  .minigrid a:hover strong {
+    color: var(--gold-hi);
+  }
+  .minigrid a:hover {
+    border-color: #3a3a3a;
+  }
+}
+
+/* tighter sections on phones */
+@media (max-width: 760px) {
+  section {
+    padding: 42px 0 8px;
+  }
+  .rule {
+    margin-top: 34px;
+  }
+  .shead {
+    margin-bottom: 20px;
+  }
+  .minigrid span {
+    display: none; /* titles only on small screens */
+  }
+  .minigrid.two span {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+  }
+}
+
+@media (max-width: 340px) {
+  .minigrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.site-footer .elyt {
+  color: #6f7a8c;
+  text-transform: none;
+  letter-spacing: 0.04em;
+}
+
+/* keep mini cards to a couple of lines */
+.minigrid span {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }

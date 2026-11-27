@@ -5,6 +5,31 @@ date: 2026-10-17
 tools: [MATLAB, SoRoSim, Cosserat rod, PID]
 repo: https://github.com/hahahibaa/soft-finger-sim
 featured: true
+brief:
+  problem: >-
+    Groundwork for a December internship at a soft gripper lab: work out the design
+    trade-offs of a pneumatic finger in simulation before measuring a real one.
+  built: >-
+    MATLAB models of a 100 × 20 × 17 mm Ecoflex 00-30 finger — hyperelastic material
+    model, pressure-to-bend, design sweeps across materials and wall thickness, valve
+    sizing, a two-loop cascade controller, grip-force estimate — plus a Cosserat-rod
+    cross-check in SoRoSim.
+  results: >-
+    The cascade controller (angle → target pressure → valves) lands within 1.5° even
+    against a finger 20% stiffer than the model, where pressure-only control is up to
+    20° off. A 0.6 mm valve reaches 90% pressure in 0.64 s smoothly; 1.2 mm is faster
+    but overshoots to 130°. 90° of bend needs about 9 kPa in Ecoflex 00-30. The
+    Cosserat model bends 11.5°/kPa and both models land at 136–138° by 12 kPa.
+  failed: >-
+    No chamber-wall ballooning in the model, so large bends read high past ~16 kPa.
+    A single PID straight from angle to valves oscillated badly. Tip force came out at
+    only 0.2–0.3 N at 20 kPa, so pinching is out and wrapping is the better grasp.
+    Springiness and valve discharge coefficient are guesses, and several PID gains sit
+    at the edge of the search grid.
+  next: >-
+    In December: bend angle vs pressure to fit the shear modulus, a fast inflate-and-vent
+    video to fit damping, tip force on a load cell, and the cascade controller running on
+    an ESP32 with a pressure sensor and an IMU.
 ---
 
 Simulation-first groundwork for a December internship at a soft robotic gripper lab. Every number here comes from simple models with literature or guessed parameters, so they show **trends and design trade-offs**, not final values. The lab work is to measure the real finger and calibrate the models against it.

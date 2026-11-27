@@ -10,6 +10,10 @@ const home = defineCollection({
     tagline: z.string().optional(),
     photo: z.string().optional(),
     links: z.array(z.object({ label: z.string(), href: z.string() })).optional(),
+    // achievement chips
+    chips: z
+      .array(z.object({ label: z.string(), where: z.string().optional(), year: z.string().optional() }))
+      .optional(),
     // title-block rows on the cover
     meta: z.array(z.object({ label: z.string(), value: z.string() })).optional(),
     // gallery: one group per project, each with its own media
@@ -19,7 +23,14 @@ const home = defineCollection({
           title: z.string(),
           slug: z.string(),
           media: z
-            .array(z.object({ src: z.string(), caption: z.string().optional(), cover: z.boolean().optional() }))
+            .array(
+              z.object({
+                src: z.string(),
+                caption: z.string().optional(),
+                cover: z.boolean().optional(),
+                poster: z.string().optional(),
+              }),
+            )
             .default([]),
         }),
       )
@@ -68,6 +79,16 @@ const projects = defineCollection({
     link: z.string().optional(),
     featured: z.boolean().default(true),
     gallery: z.string().optional(), // slug of the matching gallery group
+    // the expandable panel shown on the home page for featured work
+    brief: z
+      .object({
+        problem: z.string().optional(),
+        built: z.string().optional(),
+        results: z.string().optional(),
+        failed: z.string().optional(),
+        next: z.string().optional(),
+      })
+      .optional(),
     draft: z.boolean().default(false),
   }),
 });

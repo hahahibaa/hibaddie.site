@@ -6,6 +6,30 @@ tools: [ROS 2 Humble, Gazebo Fortress, Nav2, slam_toolbox, Python]
 repo: https://github.com/hahahibaa/sun_bot
 featured: true
 gallery: sun-bot
+brief:
+  problem: >-
+    A plant indoors only gets sun through three windows, and those patches slide
+    across the floor all day. Parking in one spot or chasing the light sensors
+    both waste most of the daylight.
+  built: >-
+    A ROS 2 Humble stack in Gazebo Fortress. sun_sensor plays the physical world
+    (NOAA sun position, window light cast onto the floor, panel current and edge
+    lux sensors, random clouds); sun_brain only sees what a real robot would and
+    runs a state machine: survey the windows on day 1, then from day 2 drive to
+    the learned spot with Nav2, creep into the patch, track it, and hold still
+    through clouds. slam_toolbox builds the map; a collision monitor stops at 30 cm.
+  results: >-
+    Over one simulated day: learning kept the panel in sun 50% of daylight
+    (1.27 A·h, 37 m driven) against 32% for the best parking spot (0.82 A·h) and
+    19% for greedy light-following (0.42 A·h, 97 m). That is 54% more energy than
+    parking and three times greedy.
+  failed: >-
+    Greedy following is hopeless indoors — it sits at about 300 lux everywhere and
+    the patches cover roughly 1% of the floor, so there is nothing to follow until
+    you are already in sunlight. The lidar scans at 0.26 m, below the windows, so
+    they map as solid wall and had to be marked by hand. The 30 cm stop zone also
+    blocks turning, so anything parked inside it freezes the robot.
+  next: "TODO: what you want to do with sun_bot next — hardware build, better cloud handling, something else?"
 ---
 
 A small differential-drive robot carries a potted plant around a closed warehouse and keeps it in the sunlight.

@@ -21,7 +21,6 @@ const featured = allProjects.filter((p) => p.data.featured);
 const bench = (await getCollection('bench', (e) => !e.data.draft)).sort(byDateDesc);
 
 const links = intro.data.links ?? [];
-const meta = intro.data.meta ?? [];
 const groups = (gallery.data.groups ?? []).filter((g) => g.media.length > 0);
 const readingLists = (reading.data.lists ?? []).filter((l) => l.items.length > 0);
 
@@ -51,19 +50,6 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
         <img src={intro.data.photo} width="190" height="190" alt="Portrait of Hiba Khan" />
       </figure>
     </div>
-
-    {
-      meta.length > 0 && (
-        <dl class="tblock">
-          {meta.map((m) => (
-            <div>
-              <dt>{m.label}</dt>
-              <dd>{m.value}</dd>
-            </div>
-          ))}
-        </dl>
-      )
-    }
 
     <h2 class="cover-label">About me</h2>
     <div class="cover-body prose"><About /></div>

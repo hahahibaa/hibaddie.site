@@ -1369,7 +1369,6 @@ section {
   font-family: var(--pixel);
   font-size: 10px;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
   color: var(--gold-soft);
   white-space: nowrap;
   pointer-events: none;
@@ -1379,6 +1378,19 @@ section {
 
 .click-me img {
   image-rendering: pixelated;
+}
+
+.cm-text {
+  text-transform: none;
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.cm-cap {
+  font-size: 15px;
+  line-height: 1;
+  margin-right: 1px;
+  color: var(--gold-soft);
 }
 
 .click-me .arrow {

@@ -600,10 +600,16 @@ section {
   display: block;
 }
 
-.thumb:hover,
+@media (hover: hover) {
+  .thumb:hover {
+    border-color: var(--gold);
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 0 0 1px var(--gold);
+  }
+}
+
 .thumb:focus-visible {
   border-color: var(--gold);
-  transform: translateY(-3px) scale(1.04);
   box-shadow: 0 0 0 1px var(--gold);
 }
 
@@ -1086,6 +1092,7 @@ section {
 
 /* touch: a chip pinned near the bottom of the screen */
 .cursor-hint.is-touch {
+  -webkit-tap-highlight-color: transparent;
   padding: 9px 13px;
   gap: 8px;
   pointer-events: auto; /* tappable: it sits clear of the finger */
@@ -1111,9 +1118,11 @@ section {
   width: 30px;
 }
 
-.cursor-hint:hover {
-  background: #ededed;
-  color: #0a0a0a;
+@media (hover: hover) {
+  .cursor-hint:hover {
+    background: #ededed;
+    color: #0a0a0a;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1184,9 +1193,14 @@ section {
   text-transform: uppercase;
 }
 
-.launcher:hover,
+@media (hover: hover) {
+  .launcher:hover {
+    transform: translateY(-4px) scale(1.03);
+    background: #1c1c1c;
+  }
+}
+
 .launcher:focus-visible {
-  transform: translateY(-4px) scale(1.03);
   background: #1c1c1c;
 }
 

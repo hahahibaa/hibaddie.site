@@ -187,26 +187,27 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
           <h3 class="group-head">
             <span class="snum">04.{gi + 1}</span>
             {group.title}
+            <em class="count">{group.media.length}</em>
           </h3>
-          <div class="plates">
+          <div class="thumbs">
             {group.media.map((m, mi) => (
-              <figure class="plate">
-                <div class="frame">
-                  {isVideo(m.src) ? (
-                    <video src={m.src} muted loop playsinline autoplay preload="metadata" />
-                  ) : (
-                    <a href={m.src} target="_blank" rel="noopener">
-                      <img src={m.src} alt={m.caption ?? group.title} loading="lazy" />
-                    </a>
-                  )}
-                </div>
-                <figcaption>
-                  <span>{m.caption}</span>
-                  <em>
-                    PL {pad(gi + 1)}.{mi + 1}
-                  </em>
-                </figcaption>
-              </figure>
+              <button
+                class="thumb"
+                type="button"
+                data-src={m.src}
+                data-caption={m.caption ?? group.title}
+                data-plate={`PL ${pad(gi + 1)}.${mi + 1}`}
+                aria-label={`Open ${m.caption ?? group.title}`}
+              >
+                {isVideo(m.src) ? (
+                  <Fragment>
+                    <video src={`${m.src}#t=0.1`} muted playsinline preload="metadata" />
+                    <span class="play" aria-hidden="true">▶</span>
+                  </Fragment>
+                ) : (
+                  <img src={m.src} alt={m.caption ?? group.title} loading="lazy" />
+                )}
+              </button>
             ))}
           </div>
         </div>

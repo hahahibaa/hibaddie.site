@@ -546,58 +546,142 @@ section {
   font-weight: 500;
 }
 
-/* ---------- plates (gallery) ---------- */
-.plates {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-}
-
-.plate {
-  margin: 0;
-  border: 1px solid var(--rule);
-  padding: 7px;
-}
-
-.plate .frame {
-  aspect-ratio: 4 / 3;
-  display: grid;
-  place-items: center;
-  background: var(--panel);
-  color: #39414e;
+/* ---------- gallery: contact-sheet thumbs ---------- */
+.group-head .count {
+  font-style: normal;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 10px;
   letter-spacing: 0.1em;
-  overflow: hidden;
+  color: var(--soft);
+  margin-left: auto;
 }
 
-.plate .frame img,
-.plate .frame video {
+.thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.thumb {
+  position: relative;
+  width: 86px;
+  height: 86px;
+  padding: 0;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  cursor: pointer;
+  overflow: hidden;
+  transition: border-color 140ms ease, transform 140ms ease;
+}
+
+.thumb img,
+.thumb video {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 
-.plate figcaption {
+.thumb:hover,
+.thumb:focus-visible {
+  border-color: var(--amber);
+  transform: translateY(-2px);
+}
+
+.thumb .play {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 15px;
+  color: #fff;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+  background: rgba(8, 14, 26, 0.25);
+}
+
+@media (max-width: 520px) {
+  .thumb {
+    width: 72px;
+    height: 72px;
+  }
+}
+
+/* ---------- lightbox ---------- */
+.lb {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) 56px;
+  align-items: center;
+  background: rgba(5, 8, 14, 0.94);
+  opacity: 0;
+  transition: opacity 160ms ease;
+}
+
+.lb.on {
+  opacity: 1;
+}
+
+.lb-stage {
+  margin: 0;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.lb-stage img,
+.lb-stage video {
+  max-width: 100%;
+  max-height: 78vh;
+  object-fit: contain;
+  border: 1px solid var(--rule);
+}
+
+.lb-stage figcaption {
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   color: var(--soft);
-  padding-top: 8px;
   display: flex;
-  justify-content: space-between;
-  gap: 10px;
+  gap: 14px;
 }
 
-.plate figcaption em {
+.lb-stage figcaption em {
   font-style: normal;
-  color: var(--blue);
+  color: var(--amber);
 }
 
-@media (max-width: 720px) {
-  .plates {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+.lb-nav,
+.lb-close {
+  background: none;
+  border: 0;
+  color: var(--soft);
+  font-family: var(--mono);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.lb-nav:hover,
+.lb-close:hover {
+  color: var(--paper);
+}
+
+.lb-close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 520px) {
+  .lb {
+    grid-template-columns: 40px minmax(0, 1fr) 40px;
   }
 }
 

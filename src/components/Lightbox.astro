@@ -1,0 +1,70 @@
+---
+// Click a thumbnail, it opens full size. Arrows and Esc work.
+---
+
+<div class="lb" id="lb" hidden>
+  <button class="lb-close" type="button" aria-label="Close">esc</button>
+  <button class="lb-nav lb-prev" type="button" aria-label="Previous">←</button>
+  <figure class="lb-stage"></figure>
+  <button class="lb-nav lb-next" type="button" aria-label="Next">→</button>
+</div>
+
+<script is:inline>
+  (() => {
+    const lb = document.getElementById('lb');
+    if (!lb) return;
+    const stage = lb.querySelector('.lb-stage');
+    const thumbs = [...document.querySelectorAll('.thumb')];
+    if (!thumbs.length) return;
+
+    let i = 0;
+
+    const render = () => {
+      const t = thumbs[i];
+      const src = t.dataset.src;
+      const isVideo = /\.(mp4|webm|mov)$/i.test(src);
+      stage.innerHTML = isVideo
+        ? `<video src="${src}" controls autoplay loop playsinline></video>`
+        : `<img src="${src}" alt="${t.dataset.caption}">`;
+      const cap = document.createElement('figcaption');
+      cap.innerHTML = `<span>${t.dataset.caption}</span><em>${t.dataset.plate}</em>`;
+      stage.appendChild(cap);
+    };
+
+    const open = (index) => {
+      i = index;
+      lb.hidden = false;
+      document.body.style.overflow = 'hidden';
+      render();
+      requestAnimationFrame(() => lb.classList.add('on'));
+    };
+
+    const close = () => {
+      lb.classList.remove('on');
+      document.body.style.overflow = '';
+      setTimeout(() => {
+        lb.hidden = true;
+        stage.innerHTML = '';
+      }, 160);
+    };
+
+    const step = (n) => {
+      i = (i + n + thumbs.length) % thumbs.length;
+      render();
+    };
+
+    thumbs.forEach((t, index) => t.addEventListener('click', () => open(index)));
+    lb.querySelector('.lb-close').addEventListener('click', close);
+    lb.querySelector('.lb-prev').addEventListener('click', () => step(-1));
+    lb.querySelector('.lb-next').addEventListener('click', () => step(1));
+    lb.addEventListener('click', (e) => {
+      if (e.target === lb) close();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (lb.hidden) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') step(-1);
+      if (e.key === 'ArrowRight') step(1);
+    });
+  })();
+</script>

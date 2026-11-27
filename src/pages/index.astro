@@ -79,7 +79,8 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
     <EntryList
       items={(experience.data.items ?? []).map((item, i) => ({
         code: `01.${i + 1}`,
-        title: item.org ? `${item.title} — ${item.org}` : item.title,
+        title: item.title,
+        org: item.org,
         href: item.href,
         note: item.href ? '▸ open log' : undefined,
         meta: item.period,
@@ -88,7 +89,7 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
     />
 
     <h3 id="achievements" class="snum" style="margin:38px 0 10px">Achievements</h3>
-    <div class="prose muted"><Achievements /></div>
+    <div class="prose muted achv"><Achievements /></div>
     <div class="rule"></div>
   </section>
 
@@ -218,7 +219,7 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
     <div class="shead" style="margin-top:56px">
       <span class="snum">LV 5</span>
       <div><h2>Next run</h2></div>
-      <p class="blurb">Loading December 2026 — <span class="gold">IIT Bombay</span>.</p>
+      <p class="blurb">Loading December 2026 — <span class="org">IIT Bombay</span>.</p>
     </div>
 
     <EntryList

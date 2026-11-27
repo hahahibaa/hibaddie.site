@@ -83,7 +83,7 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
         code: `01.${i + 1}`,
         title: item.org ? `${item.title} — ${item.org}` : item.title,
         href: item.href,
-        description: item.description,
+        note: item.href ? 'click to know more' : undefined,
         meta: item.period,
         hint: { href: '#projects', q: 'Wanna see my projects?', go: 'go to projects →' },
       }))}
@@ -107,7 +107,7 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
         code: `02.${pad(i + 1)}`,
         title: p.data.title,
         href: `/projects/${p.id}/`,
-        description: p.data.description,
+        note: 'click to know more about the project',
         meta: String(p.data.date.getUTCFullYear()),
         metaSub: p.data.tools.slice(0, 3),
         hint: p.data.gallery

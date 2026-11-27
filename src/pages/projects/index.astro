@@ -19,7 +19,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
       code: `P-${pad(i + 1)}`,
       title: p.data.title,
       href: `/projects/${p.id}/`,
-      description: p.data.description,
+      note: 'click to know more about the project',
       meta: String(p.data.date.getUTCFullYear()),
       metaSub: p.data.tools.slice(0, 3),
       hint: p.data.gallery

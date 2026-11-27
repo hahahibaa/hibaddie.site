@@ -3,6 +3,7 @@ export interface Item {
   title: string;
   href?: string;
   description?: string;
+  note?: string;
   code?: string;
   meta?: string;
   metaSub?: string[];
@@ -36,6 +37,7 @@ const { items, empty = 'Nothing here yet.' } = Astro.props;
               )}
             </h3>
             {item.description && <p class="body">{item.description}</p>}
+            {item.note && <p class="note-line">{item.note}</p>}
           </div>
           <div class="meta">
             {item.meta && <b>{item.meta}</b>}

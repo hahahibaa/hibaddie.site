@@ -102,10 +102,16 @@
             place(t.clientX, t.clientY);
           });
           clearTimeout(hideTimer);
-          hideTimer = setTimeout(() => tip.classList.remove('on'), 2000);
+          hideTimer = setTimeout(() => tip.classList.remove('on'), 4000);
         },
         { passive: true },
       );
+    });
+
+    // tapping the chip follows it and clears it
+    tip.addEventListener('click', () => {
+      clearTimeout(hideTimer);
+      tip.classList.remove('on');
     });
   })();
 </script>

@@ -1074,9 +1074,19 @@ section {
 
 /* touch: a chip pinned near the bottom of the screen */
 .cursor-hint.is-touch {
-  padding: 7px 11px;
+  padding: 9px 13px;
   gap: 8px;
-  pointer-events: none;
+  pointer-events: auto; /* tappable: it sits clear of the finger */
+}
+
+.cursor-hint.is-touch:active {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+.cursor-hint.is-touch:active .hint-q,
+.cursor-hint.is-touch:active .hint-go {
+  color: var(--ink);
 }
 
 .cursor-hint.is-touch .hint-q {

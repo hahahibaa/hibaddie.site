@@ -1892,7 +1892,7 @@ section {
 }
 
 .rail-toggle {
-  display: none;
+  display: none !important;
   background: none;
   border: 1px solid var(--rule);
   border-radius: 8px;
@@ -1919,19 +1919,28 @@ section {
     gap: 12px;
     width: 100%;
   }
-  .rail-toggle {
-    display: block;
-  }
   .rail {
-    padding: 14px 0 12px;
+    padding: 4px 0 0;
     gap: 10px;
+    border-bottom: 0;
+  }
+  .rail .sig {
+    display: none; /* the name is right above it now */
+  }
+  .rail.under-name {
+    margin: 14px 0 4px;
   }
   .idx {
-    display: none;
-    width: 100%;
-  }
-  .idx.open {
     display: block;
+    width: 100%;
+    columns: 2;
+    column-gap: 14px;
+  }
+  .idx li {
+    break-inside: avoid;
+  }
+  .idx .sub {
+    margin-left: 14px;
   }
 
   /* --- 6: each gallery group is one swipe row --- */

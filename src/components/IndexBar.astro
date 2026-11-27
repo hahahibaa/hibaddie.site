@@ -21,9 +21,6 @@ const href = (id: string) => (home ? `#${id}` : `/#${id}`);
 <nav class="rail" aria-label="Sections">
   <div class="rail-top">
     <a class="sig" href="/">Hiba Khan <span>— hibaddie.co</span></a>
-    <button class="rail-toggle" id="rail-toggle" type="button" aria-expanded="false" aria-controls="rail-list">
-      levels ▾
-    </button>
   </div>
   <ul class="idx" id="rail-list">
     {
@@ -51,23 +48,33 @@ const href = (id: string) => (home ? `#${id}` : `/#${id}`);
 </nav>
 
 <script is:inline>
-  // phones: the level list hides behind a button so the name comes first
-  (() => {
-    const btn = document.getElementById('rail-toggle');
-    const list = document.getElementById('rail-list');
-    if (!btn || !list) return;
-    const close = () => {
-      list.classList.remove('open');
-      btn.setAttribute('aria-expanded', 'false');
+  // phones: keep the full level list, but sit it under the name instead of above it
+  const placeRail = () => {
+    const rail = document.querySelector('.rail');
+    if (!rail) return;
+    // the nav renders before <main>, so wait for the hero to exist
+    const anchor = document.querySelector('.covergrid') || document.querySelector('.page-header');
+    if (!anchor) return;
+    const home = rail.parentElement;
+    const small = window.matchMedia('(max-width: 760px), (pointer: coarse)');
+    const place = () => {
+      if (small.matches) {
+        if (rail.previousElementSibling !== anchor) anchor.after(rail);
+        rail.classList.add('under-name');
+      } else {
+        if (home.firstElementChild !== rail) home.prepend(rail);
+        rail.classList.remove('under-name');
+      }
     };
-    btn.addEventListener('click', () => {
-      const open = list.classList.toggle('open');
-      btn.setAttribute('aria-expanded', String(open));
-    });
-    list.addEventListener('click', (e) => {
-      if (e.target.closest('a')) close();
-    });
-  })();
+    place();
+    small.addEventListener('change', place);
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', placeRail);
+  } else {
+    placeRail();
+  }
 </script>
 
 {

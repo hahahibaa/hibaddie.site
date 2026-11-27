@@ -99,7 +99,8 @@ groups:
       - src: /gallery/pastime/lathe.jpg
         caption: On the lathe
       - src: /gallery/pastime/clip-1.mp4
-        caption: Workshop clip
+        caption: A counter circuit, simulated
       - src: /gallery/pastime/clip-2.mp4
-        caption: Workshop clip
+        caption: Turned on the lathe
+        cover: true # this one plays inside the gallery launcher
 ---

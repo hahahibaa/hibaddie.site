@@ -19,7 +19,7 @@ const home = defineCollection({
           title: z.string(),
           slug: z.string(),
           media: z
-            .array(z.object({ src: z.string(), caption: z.string().optional() }))
+            .array(z.object({ src: z.string(), caption: z.string().optional(), cover: z.boolean().optional() }))
             .default([]),
         }),
       )

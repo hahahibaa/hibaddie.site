@@ -1,0 +1,107 @@
+---
+import { getEntry } from 'astro:content';
+
+const gallery = (await getEntry('home', 'gallery'))!;
+const groups = (gallery.data.groups ?? []).filter((g) => g.media.length > 0);
+
+const media = groups.flatMap((group, gi) =>
+  group.media.map((m, mi) => ({
+    src: m.src,
+    caption: m.caption ?? group.title,
+    group: group.title,
+    plate: `PL ${String(gi + 1).padStart(2, '0')}.${mi + 1}`,
+  })),
+);
+
+const cover = media.find((m) => !/\.(mp4|webm|mov)$/i.test(m.src));
+const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
+---
+
+{
+  media.length > 0 && (
+    <Fragment>
+      <button class="launcher" id="gal-launcher" type="button" aria-expanded="false" aria-controls="gal-panel">
+        {cover && <img src={cover.src} alt="" loading="lazy" />}
+        <span class="launcher-badge">{media.length}</span>
+        <span class="sr">Open the picture drawer</span>
+      </button>
+
+      <div class="gal-scrim" id="gal-scrim" hidden />
+
+      <section class="gal-panel" id="gal-panel" hidden aria-label="Picture drawer">
+        <header class="gal-head">
+          <div>
+            <strong>Picture drawer</strong>
+            <span>{media.length} snippets · tap to open</span>
+          </div>
+          <button class="gal-close" type="button" aria-label="Close">×</button>
+        </header>
+
+        <div class="gal-grid" data-gallery-scope>
+          {media.map((m) => (
+            <button
+              class="thumb"
+              type="button"
+              data-src={m.src}
+              data-caption={m.caption}
+              data-plate={m.plate}
+              aria-label={`Open ${m.caption}`}
+            >
+              {isVideo(m.src) ? (
+                <Fragment>
+                  <video src={`${m.src}#t=0.1`} muted playsinline preload="metadata" />
+                  <span class="play" aria-hidden="true">
+                    ▶
+                  </span>
+                </Fragment>
+              ) : (
+                <img src={m.src} alt={m.caption} loading="lazy" />
+              )}
+              <span class="thumb-cap">{m.caption}</span>
+            </button>
+          ))}
+        </div>
+      </section>
+    </Fragment>
+  )
+}
+
+<script is:inline>
+  (() => {
+    const btn = document.getElementById('gal-launcher');
+    const panel = document.getElementById('gal-panel');
+    const scrim = document.getElementById('gal-scrim');
+    if (!btn || !panel || !scrim) return;
+
+    let open = false;
+
+    const setOpen = (next) => {
+      open = next;
+      btn.setAttribute('aria-expanded', String(next));
+      if (next) {
+        panel.hidden = false;
+        scrim.hidden = false;
+        requestAnimationFrame(() => {
+          panel.classList.add('on');
+          scrim.classList.add('on');
+        });
+        if (window.matchMedia('(max-width: 760px)').matches) document.body.style.overflow = 'hidden';
+      } else {
+        panel.classList.remove('on');
+        scrim.classList.remove('on');
+        document.body.style.overflow = '';
+        setTimeout(() => {
+          panel.hidden = true;
+          scrim.hidden = true;
+        }, 220);
+      }
+    };
+
+    btn.addEventListener('click', () => setOpen(!open));
+    scrim.addEventListener('click', () => setOpen(false));
+    panel.querySelector('.gal-close').addEventListener('click', () => setOpen(false));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && open && document.getElementById('lb').hidden) setOpen(false);
+    });
+  })();
+</script>

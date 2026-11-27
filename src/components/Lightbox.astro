@@ -14,9 +14,10 @@
     const lb = document.getElementById('lb');
     if (!lb) return;
     const stage = lb.querySelector('.lb-stage');
-    const thumbs = [...document.querySelectorAll('.thumb')];
-    if (!thumbs.length) return;
+    const allThumbs = [...document.querySelectorAll('.thumb')];
+    if (!allThumbs.length) return;
 
+    let thumbs = allThumbs;
     let i = 0;
 
     const render = () => {
@@ -53,7 +54,13 @@
       render();
     };
 
-    thumbs.forEach((t, index) => t.addEventListener('click', () => open(index)));
+    allThumbs.forEach((t) =>
+      t.addEventListener('click', () => {
+        const scope = t.closest('[data-gallery-scope]');
+        thumbs = scope ? [...scope.querySelectorAll('.thumb')] : allThumbs;
+        open(thumbs.indexOf(t));
+      }),
+    );
     lb.querySelector('.lb-close').addEventListener('click', close);
     lb.querySelector('.lb-prev').addEventListener('click', () => step(-1));
     lb.querySelector('.lb-next').addEventListener('click', () => step(1));

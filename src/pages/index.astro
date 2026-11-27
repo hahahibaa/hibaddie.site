@@ -146,7 +146,7 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
   <section id="reading">
     <div class="shead">
       <span class="snum">LV 3</span>
-      <div><h2>Lore</h2></div>
+      <div><h2>Readings</h2></div>
       <p class="blurb">What I'm reading to get good at this.</p>
     </div>
 
@@ -178,7 +178,7 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
     <div class="shead">
       <span class="snum">LV 4</span>
       <div><h2>Screenshots</h2></div>
-      <p class="blurb">Tap a bubble to open it. Build photos, clips, half-finished things.</p>
+      <p class="blurb">Tap any picture to open it — or use the drawer in the corner, it follows you around.</p>
     </div>
 
     {
@@ -189,7 +189,7 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
             {group.title}
             <em class="count">{group.media.length}</em>
           </h3>
-          <div class="thumbs">
+          <div class="thumbs" data-gallery-scope>
             {group.media.map((m, mi) => (
               <button
                 class="thumb"

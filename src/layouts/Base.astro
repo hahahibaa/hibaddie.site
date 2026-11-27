@@ -2,6 +2,8 @@
 import '@fontsource/newsreader/400.css';
 import '@fontsource/newsreader/400-italic.css';
 import '@fontsource/newsreader/500.css';
+import '@fontsource/silkscreen/400.css';
+import '@fontsource/silkscreen/700.css';
 import '@fontsource/ibm-plex-mono/400.css';
 import '@fontsource/ibm-plex-mono/500.css';
 import '../styles/global.css';
@@ -10,6 +12,7 @@ import IndexBar from '../components/IndexBar.astro';
 import Footer from '../components/Footer.astro';
 import CursorHint from '../components/CursorHint.astro';
 import Lightbox from '../components/Lightbox.astro';
+import GalleryLauncher from '../components/GalleryLauncher.astro';
 
 interface Props extends SEOProps {
   home?: boolean;
@@ -36,6 +39,7 @@ const { home = false, ...seo } = Astro.props;
     </div>
     <Footer />
     <CursorHint />
+    <GalleryLauncher />
     <Lightbox />
   </body>
 </html>

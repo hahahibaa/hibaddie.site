@@ -174,6 +174,16 @@ const playlist = [...ordered, ...stills];
       }
     };
 
+    // get out of the way while the page is moving
+    let idle;
+    const duck = () => {
+      if (open) return;
+      document.body.classList.add('scrolling');
+      clearTimeout(idle);
+      idle = setTimeout(() => document.body.classList.remove('scrolling'), 450);
+    };
+    window.addEventListener('scroll', duck, { passive: true });
+
     btn.addEventListener('click', () => setOpen(!open));
     scrim.addEventListener('click', () => setOpen(false));
     panel.querySelector('.gal-close').addEventListener('click', () => setOpen(false));

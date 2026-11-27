@@ -8,7 +8,6 @@ const about = (await getEntry('home', 'about'))!;
 const experience = (await getEntry('home', 'experience'))!;
 const achievements = (await getEntry('home', 'achievements'))!;
 const now = (await getEntry('home', 'now'))!;
-const upcoming = (await getEntry('home', 'upcoming'))!;
 const gallery = (await getEntry('home', 'gallery'))!;
 // Reading is parked — content still lives in src/content/home/reading.md.
 // const reading = (await getEntry('home', 'reading'))!;
@@ -242,12 +241,13 @@ const briefRows = (b: Record<string, string | undefined>) =>
     <div class="shead">
       <span class="snum">LV 3</span>
       <div><h2>Now &amp; next</h2></div>
-      <p class="blurb">On the bench, and what starts in December at <span class="org">IIT Bombay</span>.</p>
+      <p class="blurb">What's on the bench right now, and what starts in December.</p>
     </div>
 
     <ul class="minigrid two">
       {
         [
+          // top three only — the rest live on their own pages
           ...bench.map((b) => ({
             title: b.data.title,
             desc: b.data.description,
@@ -260,30 +260,34 @@ const briefRows = (b: Record<string, string | undefined>) =>
             tag: 'in progress',
             href: item.href as string | undefined,
           })),
-          ...(upcoming.data.items ?? []).map((item) => ({
-            title: item.title,
-            desc: item.description,
-            tag: 'Dec — IIT Bombay',
-            href: undefined as string | undefined,
-          })),
-        ].map((item) => (
-          <li>
-            {item.href ? (
-              <a href={item.href}>
-                <strong>{item.title}</strong>
-                {item.desc && <span>{item.desc}</span>}
-                <em>{item.tag}</em>
-              </a>
-            ) : (
-              <div>
-                <strong>{item.title}</strong>
-                {item.desc && <span>{item.desc}</span>}
-                <em>{item.tag}</em>
-              </div>
-            )}
-          </li>
-        ))
+        ]
+          .slice(0, 3)
+          .map((item) => (
+            <li>
+              {item.href ? (
+                <a href={item.href}>
+                  <strong>{item.title}</strong>
+                  {item.desc && <span>{item.desc}</span>}
+                  <em>{item.tag}</em>
+                </a>
+              ) : (
+                <div>
+                  <strong>{item.title}</strong>
+                  {item.desc && <span>{item.desc}</span>}
+                  <em>{item.tag}</em>
+                </div>
+              )}
+            </li>
+          ))
       }
+
+      <li class="wide">
+        <div>
+          <strong>IIT Bombay, Dec 2026</strong>
+          <span>Quadruped SLAM, sensor fusion and IoT on construction sites.</span>
+          <em>starting soon</em>
+        </div>
+      </li>
     </ul>
     <div class="rule"></div>
   </section>

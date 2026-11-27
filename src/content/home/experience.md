@@ -7,6 +7,9 @@ items:
     description: Closing automation gaps in instrumental physics research. Automated a temperature-dependent LCR meter setup with PT100-based temperature control and Python data logging.
     href: /projects/impedance-measurement/
 
+  # TODO: confirm the official title the programme used (Research Assistant?
+  # research mentee? Talaria Summer Institute participant?) — it should match
+  # the achievement chip and anything you write in applications.
   - title: Research Assistant
     org: UC San Diego
     period: Jun – Aug 2025

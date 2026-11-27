@@ -19,8 +19,13 @@ const href = (id: string) => (home ? `#${id}` : `/#${id}`);
 ---
 
 <nav class="rail" aria-label="Sections">
-  <a class="sig" href="/">Hiba Khan <span>— hibaddie.co</span></a>
-  <ul class="idx">
+  <div class="rail-top">
+    <a class="sig" href="/">Hiba Khan <span>— hibaddie.co</span></a>
+    <button class="rail-toggle" id="rail-toggle" type="button" aria-expanded="false" aria-controls="rail-list">
+      levels ▾
+    </button>
+  </div>
+  <ul class="idx" id="rail-list">
     {
       items.map((item) => (
         <li>
@@ -44,6 +49,26 @@ const href = (id: string) => (home ? `#${id}` : `/#${id}`);
     }
   </ul>
 </nav>
+
+<script is:inline>
+  // phones: the level list hides behind a button so the name comes first
+  (() => {
+    const btn = document.getElementById('rail-toggle');
+    const list = document.getElementById('rail-list');
+    if (!btn || !list) return;
+    const close = () => {
+      list.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    };
+    btn.addEventListener('click', () => {
+      const open = list.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(open));
+    });
+    list.addEventListener('click', (e) => {
+      if (e.target.closest('a')) close();
+    });
+  })();
+</script>
 
 {
   home && (

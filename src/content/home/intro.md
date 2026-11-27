@@ -1,6 +1,6 @@
 ---
 name: Hiba
-tagline: Second-year mechanical engineering, JEC
+tagline: Second-year mechanical engineering, Jabalpur Engineering College, India
 # Your photo. Swap the file in /public to change it.
 photo: /me-v2.jpg
 links:

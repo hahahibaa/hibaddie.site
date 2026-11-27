@@ -1883,3 +1883,129 @@ section {
     margin-top: 22px;
   }
 }
+
+/* ============================================================
+   phone pass 2: menu button, swipe rows, floating controls
+   ============================================================ */
+.rail-top {
+  display: contents;
+}
+
+.rail-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-family: var(--pixel);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+  cursor: pointer;
+}
+
+/* the gallery card spanning both columns */
+.minigrid li.wide {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 760px) {
+  /* --- 2: name first, levels behind a button --- */
+  .rail-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+  }
+  .rail-toggle {
+    display: block;
+  }
+  .rail {
+    padding: 14px 0 12px;
+    gap: 10px;
+  }
+  .idx {
+    display: none;
+    width: 100%;
+  }
+  .idx.open {
+    display: block;
+  }
+
+  /* --- 6: each gallery group is one swipe row --- */
+  .thumbs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+    margin-inline: -20px;
+    padding-inline: 20px;
+  }
+  .thumbs::-webkit-scrollbar {
+    display: none;
+  }
+  .thumb {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    width: 116px;
+    height: 86px;
+  }
+  .plate-group + .plate-group {
+    margin-top: 26px;
+  }
+
+  /* --- 1: floating controls, icon only and out of the way --- */
+  .launcher {
+    height: 52px;
+    padding: 5px;
+    border-radius: 15px;
+  }
+  .launcher-media {
+    width: 42px;
+    height: 42px;
+    border-radius: 11px;
+  }
+  .launcher-badge {
+    min-width: 21px;
+    height: 21px;
+    font-size: 9px;
+    top: -8px;
+    right: -8px;
+  }
+  .click-me {
+    right: calc(max(16px, env(safe-area-inset-right)) + 64px);
+    bottom: calc(26px + env(safe-area-inset-bottom));
+    padding: 4px 8px 4px 5px;
+    font-size: 8px;
+    border-radius: 9px;
+  }
+  .click-me img {
+    width: 24px;
+  }
+  .cm-cap {
+    font-size: 11px;
+  }
+  .click-me .arrow {
+    font-size: 12px;
+  }
+}
+
+/* duck while the page is moving, come back when it stops */
+.launcher,
+.click-me {
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+body.scrolling .launcher {
+  opacity: 0.25;
+  transform: translateY(6px) scale(0.9);
+}
+
+body.scrolling .click-me {
+  opacity: 0;
+  transform: translateY(6px);
+}

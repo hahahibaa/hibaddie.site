@@ -10,7 +10,8 @@ chips:
   - label: Top 5 — UWA Hack for Impact
     where: India–Australia hackathon
     year: "2025"
-  - label: Research mentorship, selected
+  # keep this wording in step with the Experience entry above
+  - label: Selected — research mentorship
     where: UC San Diego
     year: "2025"
   - label: $2,000 scholarship — Qubit by Qubit

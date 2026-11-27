@@ -8,8 +8,10 @@
   --soft: #8a8a8a; /* secondary text */
   --rule: #242424; /* hairlines */
   --panel: #141414; /* recessed areas */
-  --blue: #9a9a9a; /* was the accent; now mid grey */
+  --blue: #c9a227; /* numbers and small marks */
   --blue-lt: #ffffff;
+  --gold: #c9a227;
+  --gold-soft: #ddb944;
 
   --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
   --mono: 'IBM Plex Mono', ui-monospace, Consolas, monospace;
@@ -213,6 +215,7 @@ a:hover {
 }
 
 .cover-label {
+  color: var(--gold-soft);
   font-family: var(--pixel);
   font-size: 10px;
   letter-spacing: 0.16em;
@@ -278,6 +281,7 @@ section {
 
 .shead h2 {
   font-family: var(--pixel);
+  color: var(--gold-soft);
   font-weight: 400;
   font-size: 21px;
   letter-spacing: -0.01em;
@@ -305,6 +309,7 @@ section {
 
 .cover h1 {
   font-family: var(--pixel);
+  color: var(--gold-soft);
   font-weight: 400;
   font-size: 48px;
   line-height: 1.08;
@@ -596,9 +601,9 @@ section {
 
 .thumb:hover,
 .thumb:focus-visible {
-  border-color: #ffffff;
+  border-color: var(--gold);
   transform: translateY(-3px) scale(1.04);
-  box-shadow: 0 0 0 1px #ffffff;
+  box-shadow: 0 0 0 1px var(--gold);
 }
 
 .thumb .play {
@@ -725,6 +730,7 @@ section {
 
 .page-header h1 {
   font-family: var(--pixel);
+  color: var(--gold-soft);
   font-weight: 400;
   font-size: 25px;
   line-height: 1.15;
@@ -762,6 +768,7 @@ section {
 }
 
 .prose h2 {
+  color: var(--gold-soft);
   font-family: var(--serif);
   font-weight: 500;
   font-size: 22px;
@@ -910,6 +917,7 @@ section {
   display: flex;
   align-items: baseline;
   gap: 24px;
+  color: var(--gold-soft);
   font-family: var(--pixel);
   font-weight: 400;
   font-size: 14px;
@@ -980,14 +988,14 @@ section {
 
 /* ---------- gallery nudge ---------- */
 :root {
-  --amber: #ffffff;
-  --amber-soft: #ffffff;
+  --amber: #c9a227; /* dark yellow */
+  --amber-soft: #ddb944;
 }
 
 /* inline chip: the touch fallback */
 .entry h3 .hint {
   background: #0a0a0a;
-  border: 1px solid var(--paper);
+  border: 1.5px solid var(--gold);
   border-radius: 10px;
   padding: 8px 12px;
   margin: 10px 0 0;
@@ -1033,7 +1041,7 @@ section {
   position: fixed;
   z-index: 40;
   background: #0a0a0a;
-  border: 1px solid var(--paper);
+  border: 1.5px solid var(--gold);
   border-radius: 10px;
   padding: 9px 13px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
@@ -1054,8 +1062,9 @@ section {
 
 /* touch: a chip pinned near the bottom of the screen */
 .cursor-hint.is-toast {
+  border-width: 2px;
   left: 50%;
-  bottom: 26px;
+  bottom: calc(96px + env(safe-area-inset-bottom));
   top: auto;
   transform: translate(-50%, 10px);
   max-width: calc(100vw - 40px);
@@ -1098,7 +1107,7 @@ section {
   height: 84px;
   padding: 8px 20px 8px 8px;
   border-radius: 22px;
-  border: 2px solid var(--paper);
+  border: 2px solid var(--gold);
   background: #121212;
   cursor: pointer;
   box-shadow: 0 14px 38px rgba(0, 0, 0, 0.75);
@@ -1119,7 +1128,7 @@ section {
   font-family: var(--pixel);
   font-size: 12px;
   letter-spacing: 0.08em;
-  color: var(--paper);
+  color: var(--gold-soft);
   text-transform: uppercase;
 }
 
@@ -1137,7 +1146,7 @@ section {
   height: 28px;
   padding: 0 6px;
   border-radius: 14px;
-  background: var(--paper);
+  background: var(--gold-soft);
   color: var(--ink);
   font-family: var(--pixel);
   font-size: 11px;
@@ -1174,7 +1183,7 @@ section {
   display: flex;
   flex-direction: column;
   background: #0d0d0d;
-  border: 1px solid #333;
+  border: 1.5px solid var(--gold);
   border-radius: 16px;
   box-shadow: 0 18px 50px rgba(0, 0, 0, 0.75);
   opacity: 0;
@@ -1199,6 +1208,7 @@ section {
 
 .gal-head strong {
   display: block;
+  color: var(--gold-soft);
   font-family: var(--pixel);
   font-size: 11px;
   font-weight: 400;
@@ -1341,14 +1351,14 @@ section {
   align-items: center;
   gap: 8px;
   padding: 7px 12px 7px 8px;
-  border: 1px solid var(--paper);
+  border: 1.5px solid var(--gold);
   border-radius: 12px;
   background: #121212;
   font-family: var(--pixel);
   font-size: 10px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--paper);
+  color: var(--gold-soft);
   white-space: nowrap;
   pointer-events: none;
   animation: bob 4.5s ease-in-out infinite 0.4s;
@@ -1357,6 +1367,19 @@ section {
 
 .click-me img {
   image-rendering: pixelated;
+}
+
+.click-me .arrow {
+  font-family: var(--mono);
+  font-size: 15px;
+  line-height: 1;
+  color: var(--gold-soft);
+  animation: nudge 1.4s ease-in-out infinite;
+}
+
+@keyframes nudge {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(4px); }
 }
 
 .click-me.gone {
@@ -1378,7 +1401,8 @@ section {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .click-me {
+  .click-me,
+  .click-me .arrow {
     animation: none;
   }
 }

@@ -29,9 +29,13 @@
 
     const show = () => {
       clearTimeout(hideTimer);
-      requestAnimationFrame(() => tip.classList.add('on'));
+      requestAnimationFrame(() => {
+        tip.classList.add('on');
+        // on touch there is no cursor to settle, so it is tappable immediately
+        if (!canHover) tip.classList.add('settled');
+      });
       // five seconds, then it gets out of the way
-      hideTimer = setTimeout(() => tip.classList.remove('on', 'settled'), 5000);
+      hideTimer = setTimeout(() => tip.classList.remove('on', 'settled'), canHover ? 5000 : 7000);
     };
 
     const hide = () => {

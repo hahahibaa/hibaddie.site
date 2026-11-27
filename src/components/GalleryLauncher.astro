@@ -21,6 +21,11 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
 {
   media.length > 0 && (
     <Fragment>
+      <div class="click-me" id="gal-tease" aria-hidden="true">
+        <img src="/cat.gif" alt="" width="40" height="35" />
+        <span>click me</span>
+      </div>
+
       <button class="launcher" id="gal-launcher" type="button" aria-expanded="false" aria-controls="gal-panel">
         {cover &&
           (/\.(mp4|webm|mov)$/i.test(cover.src) ? (
@@ -78,6 +83,7 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
     const btn = document.getElementById('gal-launcher');
     const panel = document.getElementById('gal-panel');
     const scrim = document.getElementById('gal-scrim');
+    const tease = document.getElementById('gal-tease');
     if (!btn || !panel || !scrim) return;
 
     let open = false;
@@ -85,6 +91,7 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
     const setOpen = (next) => {
       open = next;
       btn.setAttribute('aria-expanded', String(next));
+      if (tease) tease.classList.toggle('gone', next);
       if (next) {
         panel.hidden = false;
         scrim.hidden = false;

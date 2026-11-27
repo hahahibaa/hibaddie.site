@@ -1315,3 +1315,70 @@ section {
     animation: none;
   }
 }
+
+/* ---------- the cat ---------- */
+.chip-cat {
+  width: 38px;
+  height: auto;
+  image-rendering: pixelated;
+  flex: 0 0 auto;
+  margin-bottom: -2px;
+}
+
+.entry h3 .hint,
+.cursor-hint {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.click-me {
+  position: fixed;
+  right: calc(max(24px, env(safe-area-inset-right)) + 186px);
+  bottom: calc(44px + env(safe-area-inset-bottom));
+  z-index: 45;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px 7px 8px;
+  border: 1px solid var(--paper);
+  border-radius: 12px;
+  background: #121212;
+  font-family: var(--pixel);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper);
+  white-space: nowrap;
+  pointer-events: none;
+  animation: bob 4.5s ease-in-out infinite 0.4s;
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+
+.click-me img {
+  image-rendering: pixelated;
+}
+
+.click-me.gone {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+@media (max-width: 760px) {
+  .click-me {
+    right: calc(max(16px, env(safe-area-inset-right)) + 76px);
+    bottom: calc(32px + env(safe-area-inset-bottom));
+    font-size: 9px;
+    padding: 6px 10px 6px 6px;
+  }
+  .click-me img {
+    width: 32px;
+    height: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .click-me {
+    animation: none;
+  }
+}

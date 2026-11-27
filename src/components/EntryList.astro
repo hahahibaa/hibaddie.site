@@ -31,8 +31,11 @@ const { items, empty = 'Nothing here yet.' } = Astro.props;
               {item.href ? <a href={item.href}>{item.title}</a> : item.title}
               {item.hint && (
                 <a class="hint" href={item.hint.href}>
-                  <span class="hint-q">{item.hint.q}</span>
-                  <span class="hint-go">{item.hint.go}</span>
+                  <img class="chip-cat" src="/cat.gif" alt="" width="38" height="33" />
+                  <span>
+                    <span class="hint-q">{item.hint.q}</span>
+                    <span class="hint-go">{item.hint.go}</span>
+                  </span>
                 </a>
               )}
             </h3>

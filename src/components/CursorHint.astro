@@ -96,11 +96,11 @@
           if (!t) return;
           fill(hint);
           tip.hidden = false;
+          tip.classList.remove('pressed');
+          // show it on this frame — no waiting for a fade
+          tip.classList.add('on');
           place(t.clientX, t.clientY);
-          requestAnimationFrame(() => {
-            tip.classList.add('on');
-            place(t.clientX, t.clientY);
-          });
+          requestAnimationFrame(() => place(t.clientX, t.clientY));
           clearTimeout(hideTimer);
           hideTimer = setTimeout(() => tip.classList.remove('on'), 4000);
         },
@@ -108,10 +108,27 @@
       );
     });
 
-    // tapping the chip follows it and clears it
+    // pressed state by hand: :active lingers on touch screens
+    tip.addEventListener('touchstart', () => tip.classList.add('pressed'), { passive: true });
+    ['touchend', 'touchcancel'].forEach((ev) =>
+      tip.addEventListener(ev, () => setTimeout(() => tip.classList.remove('pressed'), 120), { passive: true }),
+    );
+
+    // tapping it follows the link and clears it straight away
     tip.addEventListener('click', () => {
       clearTimeout(hideTimer);
-      tip.classList.remove('on');
+      tip.classList.remove('on', 'pressed');
     });
+
+    // a scroll means they have moved on
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (!tip.classList.contains('on')) return;
+        clearTimeout(hideTimer);
+        hideTimer = setTimeout(() => tip.classList.remove('on', 'pressed'), 1200);
+      },
+      { passive: true },
+    );
   })();
 </script>

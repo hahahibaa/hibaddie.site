@@ -1077,15 +1077,17 @@ section {
   padding: 9px 13px;
   gap: 8px;
   pointer-events: auto; /* tappable: it sits clear of the finger */
+  transform: none;
+  transition: opacity 70ms linear, background-color 90ms linear;
 }
 
-.cursor-hint.is-touch:active {
+/* pressed state is driven from JS — :active sticks on touch screens */
+.cursor-hint.is-touch.pressed {
   background: var(--gold);
-  color: var(--ink);
 }
 
-.cursor-hint.is-touch:active .hint-q,
-.cursor-hint.is-touch:active .hint-go {
+.cursor-hint.is-touch.pressed .hint-q,
+.cursor-hint.is-touch.pressed .hint-go {
   color: var(--ink);
 }
 

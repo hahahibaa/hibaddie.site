@@ -74,7 +74,33 @@ const briefRows = (b: Record<string, string | undefined>) =>
     </div>
 
     <h2 class="cover-label">About me</h2>
-    <div class="cover-body prose"><About /></div>
+    <div class="cover-body prose" id="about-body"><About /></div>
+    <button class="readmore" id="about-more" type="button" hidden>read more ▾</button>
+
+    <script is:inline>
+      // on phones the bio collapses so the first screen reaches Experience
+      (() => {
+        const body = document.getElementById('about-body');
+        const btn = document.getElementById('about-more');
+        if (!body || !btn) return;
+        const small = window.matchMedia('(max-width: 760px)');
+        const apply = () => {
+          if (small.matches) {
+            body.classList.add('clamped');
+            btn.hidden = false;
+          } else {
+            body.classList.remove('clamped');
+            btn.hidden = true;
+          }
+        };
+        btn.addEventListener('click', () => {
+          body.classList.remove('clamped');
+          btn.hidden = true;
+        });
+        apply();
+        small.addEventListener('change', apply);
+      })();
+    </script>
 
     <div class="entry nudge-only">
       <h3>

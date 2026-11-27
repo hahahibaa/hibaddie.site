@@ -1813,3 +1813,73 @@ section {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+/* ---------- first-screen fit on phones ---------- */
+.cover-body.clamped {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.readmore {
+  margin-top: 8px;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--pixel);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+}
+
+@media (max-width: 760px) {
+  /* tighter index rail */
+  .rail {
+    padding: 18px 0 14px;
+    gap: 14px;
+  }
+  .idx a {
+    padding: 4px 0 4px 14px;
+    font-size: 9.5px;
+  }
+  .idx .sub a {
+    padding: 3px 0 3px 12px;
+  }
+
+  /* tighter hero */
+  .cover {
+    padding-top: 18px;
+  }
+  .covergrid {
+    grid-template-columns: 76px minmax(0, 1fr);
+    gap: 13px;
+  }
+  .cover h1 {
+    font-size: 22px;
+    margin-bottom: 5px;
+  }
+  .ways {
+    margin-top: 10px;
+    font-size: 11px;
+  }
+  .cover-label {
+    margin: 20px 0 -18px;
+  }
+  .cover-body {
+    margin-top: 26px;
+    font-size: 15.5px;
+    line-height: 1.6;
+  }
+  .nudge-only {
+    margin-top: 12px;
+  }
+  section#cover {
+    padding-bottom: 0;
+  }
+  section#cover .rule {
+    margin-top: 22px;
+  }
+}

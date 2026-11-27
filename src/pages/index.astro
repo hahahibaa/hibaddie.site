@@ -65,7 +65,7 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
       )
     }
 
-    <h2 class="cover-label">About me</h2>
+    <h2 class="cover-label">Player card</h2>
     <div class="cover-body prose"><About /></div>
     <div class="rule"></div>
   </section>
@@ -73,9 +73,9 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
   <!-- ========== 01 EXPERIENCE ========== -->
   <section id="work">
     <div class="shead">
-      <span class="snum">01</span>
+      <span class="snum">LV 1</span>
       <div><h2>Experience</h2></div>
-      <p class="blurb">Research, instrumentation, and one company I co-founded at sixteen.</p>
+      <p class="blurb">Where I've been, and what I took apart while I was there.</p>
     </div>
 
     <EntryList
@@ -83,13 +83,13 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
         code: `01.${i + 1}`,
         title: item.org ? `${item.title} — ${item.org}` : item.title,
         href: item.href,
-        note: item.href ? 'click to know more' : undefined,
+        note: item.href ? '▸ open log' : undefined,
         meta: item.period,
-        hint: { href: '#projects', q: 'Wanna see my projects?', go: 'go to projects →' },
+        hint: { href: '#projects', q: 'Wanna see what I build?', go: '▸ enter the builds' },
       }))}
     />
 
-    <h3 id="achievements" class="snum" style="margin:38px 0 10px">Selected achievements</h3>
+    <h3 id="achievements" class="snum" style="margin:38px 0 10px">Trophies</h3>
     <div class="prose muted"><Achievements /></div>
     <div class="rule"></div>
   </section>
@@ -97,9 +97,9 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
   <!-- ========== 02 PROJECTS ========== -->
   <section id="projects">
     <div class="shead">
-      <span class="snum">02</span>
-      <div><h2>Projects</h2></div>
-      <p class="blurb">Each entry opens its own sheet — build log, figures, and what I got wrong.</p>
+      <span class="snum">LV 2</span>
+      <div><h2>Builds</h2></div>
+      <p class="blurb">Main quests. Each one opens its own log — figures, results, and what I got wrong.</p>
     </div>
 
     <EntryList
@@ -107,18 +107,18 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
         code: `02.${pad(i + 1)}`,
         title: p.data.title,
         href: `/projects/${p.id}/`,
-        note: 'click to know more about the project',
+        note: '▸ open log',
         meta: String(p.data.date.getUTCFullYear()),
         metaSub: p.data.tools.slice(0, 3),
         hint: p.data.gallery
-          ? { href: `#g-${p.data.gallery}`, q: 'Wanna see the pictures?', go: 'go to the gallery →' }
-          : { href: '#work', q: 'Wanna see my experience?', go: 'go to experience →' },
+          ? { href: `#g-${p.data.gallery}`, q: 'Wanna see the pictures?', go: '▸ enter the screenshots' }
+          : { href: '#work', q: "Wanna see where I've been?", go: '▸ enter the experience' },
       }))}
     />
 
-    <p class="more"><a href="/projects/">All {allProjects.length} projects →</a></p>
+    <p class="more"><a href="/projects/">▸ all {allProjects.length} builds</a></p>
 
-    <h3 class="snum" style="margin:46px 0 10px">Currently building</h3>
+    <h3 class="snum" style="margin:46px 0 10px">Side quests — in progress</h3>
     <EntryList
       items={(now.data.items ?? []).map((item) => ({
         code: '··',
@@ -145,9 +145,9 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
   <!-- ========== 03 READING ========== -->
   <section id="reading">
     <div class="shead">
-      <span class="snum">03</span>
-      <div><h2>Reading</h2></div>
-      <p class="blurb">What I'm working through, and what I keep going back to.</p>
+      <span class="snum">LV 3</span>
+      <div><h2>Lore</h2></div>
+      <p class="blurb">What I'm reading to get good at this.</p>
     </div>
 
     {
@@ -176,9 +176,9 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
   <!-- ========== 04 GALLERY ========== -->
   <section id="gallery">
     <div class="shead">
-      <span class="snum">04</span>
-      <div><h2>Gallery</h2></div>
-      <p class="blurb">Build photos, half-finished things, and work still on the bench.</p>
+      <span class="snum">LV 4</span>
+      <div><h2>Screenshots</h2></div>
+      <p class="blurb">Tap a bubble to open it. Build photos, clips, half-finished things.</p>
     </div>
 
     {
@@ -218,9 +218,9 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
   <section id="upcoming">
     <div class="rule" style="margin-top:0"></div>
     <div class="shead" style="margin-top:56px">
-      <span class="snum">05</span>
-      <div><h2>Upcoming</h2></div>
-      <p class="blurb">Starting December 2026 at IIT Bombay.</p>
+      <span class="snum">LV 5</span>
+      <div><h2>Next run</h2></div>
+      <p class="blurb">Loading December 2026 — IIT Bombay.</p>
     </div>
 
     <EntryList
@@ -229,7 +229,7 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
         title: item.title,
         description: item.description,
         meta: item.period ?? 'planned',
-        hint: { href: '#gallery', q: 'Wanna see the pictures?', go: 'go to the gallery →' },
+        hint: { href: '#gallery', q: 'Wanna see the pictures?', go: '▸ enter the screenshots' },
       }))}
     />
   </section>

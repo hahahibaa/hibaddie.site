@@ -11,20 +11,20 @@ const pad = (n: number) => String(n).padStart(2, '0');
 <Base title="Projects" description="Instrumentation, robotics and hardware projects by Hiba Khan.">
   <a class="back" href="/#projects">← Back to the sheet</a>
   <header class="page-header">
-    <h1>Projects</h1>
-    <p class="lede muted">Instruments, robots, and the occasional experiment that didn't work.</p>
+    <h1>Builds</h1>
+    <p class="lede muted">Every main quest so far, newest first.</p>
   </header>
   <EntryList
     items={projects.map((p, i) => ({
       code: `P-${pad(i + 1)}`,
       title: p.data.title,
       href: `/projects/${p.id}/`,
-      note: 'click to know more about the project',
+      note: '▸ open log',
       meta: String(p.data.date.getUTCFullYear()),
       metaSub: p.data.tools.slice(0, 3),
       hint: p.data.gallery
-        ? { href: `/#g-${p.data.gallery}`, q: 'Wanna see the pictures?', go: 'go to the gallery →' }
-        : { href: '/#work', q: 'Wanna see my experience?', go: 'go to experience →' },
+        ? { href: `/#g-${p.data.gallery}`, q: 'Wanna see the pictures?', go: '▸ enter the screenshots' }
+        : { href: '/#work', q: "Wanna see where I've been?", go: '▸ enter the experience' },
     }))}
   />
 </Base>

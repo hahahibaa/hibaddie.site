@@ -3,13 +3,13 @@
    Tokens first; everything else is hairlines and typography.
    ============================================================ */
 :root {
-  --ink: #0b0f16; /* page */
-  --paper: #e8e9ec; /* primary text */
-  --soft: #9aa3b2; /* secondary text */
-  --rule: #20262f; /* hairlines */
-  --panel: #0e131b; /* recessed areas (plate frames) */
-  --blue: #4d7fd6; /* drawing blue */
-  --blue-lt: #8fb2ec;
+  --ink: #0a0a0a; /* page */
+  --paper: #ededed; /* primary text */
+  --soft: #8a8a8a; /* secondary text */
+  --rule: #242424; /* hairlines */
+  --panel: #141414; /* recessed areas */
+  --blue: #9a9a9a; /* was the accent; now mid grey */
+  --blue-lt: #ffffff;
 
   --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
   --mono: 'IBM Plex Mono', ui-monospace, Consolas, monospace;
@@ -72,11 +72,11 @@ img {
 a {
   color: var(--blue-lt);
   text-decoration: none;
-  border-bottom: 1px solid rgba(143, 178, 236, 0.35);
+  border-bottom: 1px solid rgba(237, 237, 237, 0.35);
 }
 
 a:hover {
-  border-bottom-color: var(--blue-lt);
+  border-bottom-color: var(--paper);
 }
 
 :focus-visible {
@@ -314,6 +314,7 @@ section {
 
 .portrait {
   border: 1px solid var(--rule);
+  border-radius: 14px;
   padding: 7px;
   margin: 0;
 }
@@ -321,6 +322,7 @@ section {
 .portrait img {
   display: block;
   width: 100%;
+  border-radius: 9px;
 }
 
 .portrait figcaption {
@@ -355,6 +357,8 @@ section {
 }
 
 .tblock {
+  border-radius: 10px;
+  overflow: hidden;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1px;
@@ -559,19 +563,20 @@ section {
 .thumbs {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 14px;
 }
 
 .thumb {
   position: relative;
-  width: 86px;
-  height: 86px;
-  padding: 0;
-  border: 1px solid var(--rule);
+  width: 92px;
+  height: 92px;
+  padding: 3px;
+  border: 1px solid #3a3a3a;
+  border-radius: 50%;
   background: var(--panel);
   cursor: pointer;
   overflow: hidden;
-  transition: border-color 140ms ease, transform 140ms ease;
+  transition: border-color 150ms ease, transform 150ms ease, box-shadow 150ms ease;
 }
 
 .thumb img,
@@ -580,29 +585,35 @@ section {
   height: 100%;
   object-fit: cover;
   display: block;
+  border-radius: 50%;
 }
 
 .thumb:hover,
 .thumb:focus-visible {
-  border-color: var(--amber);
-  transform: translateY(-2px);
+  border-color: #ffffff;
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 0 0 1px #ffffff;
 }
 
 .thumb .play {
   position: absolute;
-  inset: 0;
+  inset: 3px;
+  border-radius: 50%;
   display: grid;
   place-items: center;
   font-size: 15px;
   color: #fff;
   text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
-  background: rgba(8, 14, 26, 0.25);
+  background: rgba(0, 0, 0, 0.3);
 }
 
 @media (max-width: 520px) {
   .thumb {
-    width: 72px;
-    height: 72px;
+    width: 78px;
+    height: 78px;
+  }
+  .thumbs {
+    gap: 11px;
   }
 }
 
@@ -614,7 +625,7 @@ section {
   display: grid;
   grid-template-columns: 56px minmax(0, 1fr) 56px;
   align-items: center;
-  background: rgba(5, 8, 14, 0.94);
+  background: rgba(0, 0, 0, 0.95);
   opacity: 0;
   transition: opacity 160ms ease;
 }
@@ -638,6 +649,7 @@ section {
   max-height: 78vh;
   object-fit: contain;
   border: 1px solid var(--rule);
+  border-radius: 12px;
 }
 
 .lb-stage figcaption {
@@ -785,6 +797,7 @@ section {
   display: block;
   margin: 1.8rem 0;
   border: 1px solid var(--rule);
+  border-radius: 12px;
   padding: 7px;
 }
 
@@ -795,6 +808,7 @@ section {
 }
 
 .prose pre {
+  border-radius: 10px;
   font-size: 12.5px;
   line-height: 1.6;
   padding: 16px 18px;
@@ -954,15 +968,15 @@ section {
 
 /* ---------- gallery nudge ---------- */
 :root {
-  --amber: #e8c15a;
-  --amber-soft: #f3d98a;
+  --amber: #ffffff;
+  --amber-soft: #ffffff;
 }
 
 /* inline chip: the touch fallback */
 .entry h3 .hint {
-  background: rgba(77, 127, 214, 0.16);
-  border: 1px solid var(--amber);
-  border-radius: 4px;
+  background: #0a0a0a;
+  border: 1px solid var(--paper);
+  border-radius: 10px;
   padding: 8px 12px;
   margin: 10px 0 0;
   display: block;
@@ -1006,11 +1020,11 @@ section {
 .cursor-hint {
   position: fixed;
   z-index: 40;
-  background: rgba(14, 28, 54, 0.97);
-  border: 1px solid var(--amber);
-  border-radius: 4px;
+  background: #0a0a0a;
+  border: 1px solid var(--paper);
+  border-radius: 10px;
   padding: 9px 13px;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
   pointer-events: none;
   opacity: 0;
   transform: translateY(4px);
@@ -1041,8 +1055,8 @@ section {
 }
 
 .cursor-hint:hover {
-  background: rgba(232, 193, 90, 0.16);
-  color: #fff;
+  background: #ededed;
+  color: #0a0a0a;
 }
 
 @media (prefers-reduced-motion: reduce) {

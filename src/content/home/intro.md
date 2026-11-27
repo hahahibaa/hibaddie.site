@@ -4,13 +4,13 @@ tagline: "Robotics, automation, mechanical. Firm believer in ELYT: everything ca
 # Your photo. Swap the file in /public to change it.
 photo: /me-v2.jpg
 meta:
-  - label: Subject
+  - label: Class
     value: Mechanical engineering, 2nd yr
-  - label: Institution
+  - label: Guild
     value: JEC Jabalpur
   - label: Status
     value: Open to internships
-  - label: Based in
+  - label: Spawn point
     value: Jabalpur, India
 links:
   - label: GitHub

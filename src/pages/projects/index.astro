@@ -23,7 +23,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
       meta: String(p.data.date.getUTCFullYear()),
       metaSub: p.data.tools.slice(0, 3),
       hint: p.data.gallery
-        ? { href: `/#g-${p.data.gallery}`, q: 'Wanna see the pictures?', go: '▸ enter the screenshots' }
+        ? { href: `/#g-${p.data.gallery}`, q: 'Wanna see the pictures?', go: '▸ enter the gallery' }
         : { href: '/#work', q: "Wanna see where I've been?", go: '▸ enter the experience' },
     }))}
   />

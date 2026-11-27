@@ -65,7 +65,7 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
       )
     }
 
-    <h2 class="cover-label">Player card</h2>
+    <h2 class="cover-label">About me</h2>
     <div class="cover-body prose"><About /></div>
     <div class="rule"></div>
   </section>
@@ -89,7 +89,7 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
       }))}
     />
 
-    <h3 id="achievements" class="snum" style="margin:38px 0 10px">Trophies</h3>
+    <h3 id="achievements" class="snum" style="margin:38px 0 10px">Achievements</h3>
     <div class="prose muted"><Achievements /></div>
     <div class="rule"></div>
   </section>
@@ -111,7 +111,7 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
         meta: String(p.data.date.getUTCFullYear()),
         metaSub: p.data.tools.slice(0, 3),
         hint: p.data.gallery
-          ? { href: `#g-${p.data.gallery}`, q: 'Wanna see the pictures?', go: '▸ enter the screenshots' }
+          ? { href: `#g-${p.data.gallery}`, q: 'Wanna see the pictures?', go: '▸ enter the gallery' }
           : { href: '#work', q: "Wanna see where I've been?", go: '▸ enter the experience' },
       }))}
     />
@@ -177,7 +177,7 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
   <section id="gallery">
     <div class="shead">
       <span class="snum">LV 4</span>
-      <div><h2>Screenshots</h2></div>
+      <div><h2>Gallery</h2></div>
       <p class="blurb">Tap any picture to open it — or use the drawer in the corner, it follows you around.</p>
     </div>
 
@@ -229,7 +229,7 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
         title: item.title,
         description: item.description,
         meta: item.period ?? 'planned',
-        hint: { href: '#gallery', q: 'Wanna see the pictures?', go: '▸ enter the screenshots' },
+        hint: { href: '#gallery', q: 'Wanna see the pictures?', go: '▸ enter the gallery' },
       }))}
     />
   </section>

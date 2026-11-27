@@ -13,7 +13,8 @@ const media = groups.flatMap((group, gi) =>
   })),
 );
 
-const cover = media.find((m) => !/\.(mp4|webm|mov)$/i.test(m.src));
+// the launcher previews a clip — a still graph is a dull invitation
+const cover = media.find((m) => /\.(mp4|webm|mov)$/i.test(m.src)) ?? media[0];
 const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
 ---
 
@@ -21,7 +22,13 @@ const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
   media.length > 0 && (
     <Fragment>
       <button class="launcher" id="gal-launcher" type="button" aria-expanded="false" aria-controls="gal-panel">
-        {cover && <img src={cover.src} alt="" loading="lazy" />}
+        {cover &&
+          (/\.(mp4|webm|mov)$/i.test(cover.src) ? (
+            <video src={cover.src} muted loop autoplay playsinline preload="metadata" />
+          ) : (
+            <img src={cover.src} alt="" loading="lazy" />
+          ))}
+        <span class="launcher-label">Gallery</span>
         <span class="launcher-badge">{media.length}</span>
         <span class="sr">Open the picture drawer</span>
       </button>

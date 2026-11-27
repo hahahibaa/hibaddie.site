@@ -83,7 +83,8 @@ const briefRows = (b: Record<string, string | undefined>) =>
         const body = document.getElementById('about-body');
         const btn = document.getElementById('about-more');
         if (!body || !btn) return;
-        const small = window.matchMedia('(max-width: 760px)');
+        // narrow screens, and touch devices even in Chrome's desktop-site mode
+        const small = window.matchMedia('(max-width: 760px), (pointer: coarse)');
         const apply = () => {
           if (small.matches) {
             body.classList.add('clamped');
